@@ -60,6 +60,10 @@ HTTPS routes, install/offline assets, API authentication rejection, CORS, and th
 
 ## Project documents
 
+The [operations guide](api/OPERATIONS.md) covers Sentry integration, API readiness/web
+uptime checks, encrypted backups, an isolated restore drill and new-project
+recovery steps. Offsite backup storage and unattended scheduling need configuration.
+
 - [Product SPEC](SPEC.md): planned features, behavior, release scope, and open product decisions.
 - [Web app to-do](WEB_APP_TODO.md): prioritized checklist for the browser app.
 - [Project boundaries](AGENTS.md): durable engineering and security rules for work across all three projects.

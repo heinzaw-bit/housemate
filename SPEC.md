@@ -1,7 +1,19 @@
 # HouseMate product specification
 
 Status: evolving product scope  
-Last updated: 2026-09-30
+Last updated: 2026-10-01
+
+## Production reliability
+
+Production integrates optional Sentry reporting for API and browser/server errors,
+with household/request data, tokens and raw exception text removed before sending.
+Operators configure separate project DSNs and issue alerts. HTTP uptime checks
+cover the public web page and bounded read-only API database readiness, with owner
+failure/recovery alerts. Financial writes retain their existing confirmation and
+idempotency behavior during incidents. Encrypted logical backups include household,
+Auth and Storage metadata; restore drills validate isolated data/API recovery.
+Offsite retention and unattended backups require operator setup. A local drill
+does not establish Supabase Auth delivery or production cutover acceptance.
 
 ## Product goal
 
