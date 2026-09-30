@@ -1,125 +1,54 @@
-# HouseMate — Codex Build Specification
+# HouseMate
 
-HouseMate is a web-first shared-household operating system for roommates.
+HouseMate is an app for people sharing a household to coordinate expenses, bills, settlements, meals, shopping, chores, events, announcements, and reminders. It supports households using either USD or Thai baht. Payments are recorded manually; HouseMate does not move money.
 
-The initial real-world use case is a group of university students living together who repeatedly need to coordinate:
+## Current workspace
 
-- shared expenses,
-- utilities,
-- different per-person charges,
-- groceries,
-- cooking,
-- meals,
-- BBQ/hotpot events,
-- shopping,
-- chores,
-- announcements,
-- polls,
-- reminders,
-- and settlements.
+| Folder | What is here |
+| --- | --- |
+| [`api/`](api/README.md) | Node.js/TypeScript API, Supabase Auth, PostgreSQL migrations, and OpenAPI contract. Household, money, daily work, events, announcements, polls, personal notifications, preferences, and a web push queue are implemented. |
+| [`app/`](app/README.md) | Next.js web app with sign-in, household workflows, money, daily work, events, announcements, polls, notification inbox/settings, and explicit browser push opt-in. |
+| `mobile/` | Planned React Native/Expo app; it has not been created yet. |
 
-The system should remove the need to combine Messenger/LINE chats, calculators, notes, spreadsheets, and repeated manual reminders.
+The API and web app are independent Git repositories with their own packages, lockfiles, and CI checks. This whole-project repository includes them as Git submodules. Each folder's README has its own details and check commands.
 
-## Product principle
+## GitHub repositories
 
-**HouseMate should not require users to keep reopening the website just to know what is happening.**
+| Repository | Purpose |
+| --- | --- |
+| [heinzaw-bit/housemate](https://github.com/heinzaw-bit/housemate) | Shared product documents, engineering boundaries, handoff, and pinned API/app revisions. |
+| [heinzaw-bit/housemate-api](https://github.com/heinzaw-bit/housemate-api) | Independently buildable and releasable API. |
+| [heinzaw-bit/housemate-app](https://github.com/heinzaw-bit/housemate-app) | Independently buildable and releasable web app. |
 
-The web application is the source of truth. Notifications and messaging channels deliver important actions to users.
+Clone the whole project, including its pinned API and app versions:
 
-Primary access:
+```powershell
+git clone --recurse-submodules https://github.com/heinzaw-bit/housemate.git
+```
 
-- Responsive web app
-- Installable PWA
-- Web Push
-- In-app activity feed
-- LINE integration later in the MVP+ roadmap
-- SMS only as an optional future fallback
+For an existing clone, run `git submodule update --init --recursive`. The repositories are private; authenticate as an account with access. Either child repository can also be cloned on its own, with no sibling runtime dependency.
 
-## Core product areas
+When changing API or web code, commit and push from that child repository first. Then commit the updated `api` or `app` submodule pointer and any shared documents in the whole-project repository and push it. `git submodule update --init --recursive` checks out the recorded versions, which may use a detached HEAD; switch the affected child to `main` before making new changes. Shared product documents remain here, and each child includes its own engineering instructions.
 
-1. Household & members
-2. Money
-3. Bills
-4. Balances & settlements
-5. Meals & cooking
-6. Shopping
-7. Chores
-8. Events
-9. Announcements & polls
-10. Notifications
-11. AI assistant
-12. Household summaries
+## Run locally
 
-## Source-of-truth rule
+You need Node.js 22 or newer, npm, and a Supabase project. The API needs a PostgreSQL connection URL; the web app needs only the Supabase project URL and publishable key. Keep the database URL and any secret keys out of the web app.
 
-The AI never owns financial truth.
+1. In `api/`, run `npm ci`, copy `.env.example` to `.env`, and fill in `DATABASE_URL`, `SUPABASE_URL`, and `SUPABASE_PUBLISHABLE_KEY`. Set `WEB_ORIGINS=http://localhost:3000` for local web development. Apply `api/sql/001_household_foundation.sql` and then `api/sql/002_member_onboarding.sql` if they have not already been applied; run `npm run migrate:expenses`, `npm run migrate:bills`, `npm run migrate:settlements`, `npm run migrate:edits`, `npm run migrate:voids`, `npm run migrate:meals`, `npm run migrate:shopping`, `npm run migrate:shopping-currency`, `npm run migrate:chores`, `npm run migrate:events`, `npm run migrate:announcements-polls`, and `npm run migrate:notifications` in order. See the [API setup guide](api/README.md).
+2. In `app/`, run `npm ci`, copy `.env.example` to `.env.local`, and fill in `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_SUPABASE_URL`, and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. For local development, the API URL is `http://localhost:3001`. See the [web app setup guide](app/README.md).
+3. Add `http://localhost:3000` to the Supabase Auth redirect allow list. In one terminal run `npm run dev` from `api/`; in another run `npm run dev` from `app/`.
+4. Open [the web app](http://localhost:3000). The [design preview](http://localhost:3000/preview) works in development without sign-in and uses sample data. The [API health route](http://localhost:3001/health) checks that the API is running.
 
-The AI:
-- understands natural language,
-- extracts structured intent,
-- prepares drafts,
-- asks for confirmation,
-- explains calculations,
-- creates summaries.
+The design preview is for browsing the interface. Household creation and live data require configured Supabase Auth, the API, and the database migrations.
 
-The deterministic business logic:
-- performs calculations,
-- enforces permissions,
-- writes financial records,
-- computes balances,
-- applies settlement rules.
+The bell opens the personal notification inbox and settings. Keep the API running for scheduled reminders. Optional live web push needs server-only VAPID keys and a real public contact email or HTTPS support URL; it is currently disabled because no contact is available. The inbox, reminders, and category/quiet-hours preferences work independently of push. See the [push setup guide](api/README.md#notifications-and-optional-web-push).
 
-## Recommended implementation stack
+The web app includes Android/iPhone installation guidance, a public offline fallback, connection/update notices, interrupted financial-confirmation guidance, accessibility improvements, and deferred workspace loading. See [web release checks](app/QUALITY_CHECKS.md) for verification and the remaining actual-phone acceptance checks. PWA service-worker behavior runs in production, rather than the development server.
 
-### Web
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- PWA support
+## Project documents
 
-### Backend / data
-- PostgreSQL
-- Supabase for database, auth, storage, realtime, and server-side functions where useful
-
-### AI
-- OpenAI API with structured outputs/tool calls
-- AI actions must be validated by server-side application logic
-
-### Messaging / notifications
-- Web Push first
-- Notification preference center
-- LINE Messaging API after core household workflows are stable
-- Email/SMS only if needed later
-
-## Documents
-
-Read these in this order before implementing:
-
-1. `PRODUCT.md`
-2. `PRD.md`
-3. `UX_FLOWS.md`
-4. `DATA_MODEL.md`
-5. `MONEY_ENGINE.md`
-6. `AI_ASSISTANT.md`
-7. `NOTIFICATIONS_MESSAGING.md`
-8. `ARCHITECTURE.md`
-9. `SECURITY_PRIVACY.md`
-10. `API_CONTRACTS.md`
-11. `TESTING.md`
-12. `IMPLEMENTATION_PLAN.md`
-13. `CODEX_MASTER_PROMPT.md`
-14. `FIGMA_MAKE_PROMPT.md`
-
-## MVP boundary
-
-The first usable version must solve real shared-house problems without requiring AI.
-
-AI is added on top of reliable household workflows.
-
-The minimum reliable product is:
-
-Household → Members → Expenses → Bills → Flexible Split → Balances → Settlements → Meals → Shopping → Chores → Announcements/Polls → Notifications → AI Assistant.
-
-Do not begin with banking integrations, smart-home devices, cameras, autonomous purchases, or complicated analytics.
-# house_mate
+- [Product SPEC](SPEC.md): planned features, behavior, release scope, and open product decisions.
+- [Web app to-do](WEB_APP_TODO.md): prioritized checklist for the browser app.
+- [Project boundaries](AGENTS.md): durable engineering and security rules for work across all three projects.
+- [API contract](api/openapi.yaml): implemented HTTP endpoints and schemas.
+- The other root Markdown files are supporting product and domain references. Some describe an earlier web-only architecture; follow the current SPEC and project boundaries when they differ.

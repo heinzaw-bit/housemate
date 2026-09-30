@@ -1,0 +1,8 @@
+[submodule "api"]
+	path = api
+	url = https://github.com/heinzaw-bit/housemate-api.git
+	branch = main
+[submodule "app"]
+	path = app
+	url = https://github.com/heinzaw-bit/housemate-app.git
+	branch = main
