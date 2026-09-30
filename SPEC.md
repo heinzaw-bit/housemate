@@ -87,6 +87,18 @@ This document describes intended features and user-visible behavior. It can chan
 - Clearly distinguish loading, empty, error, draft, pending, and confirmed states. A financial action is final only after the API confirms it.
 - Make common flows usable with accessible labels, keyboard support on web, and meaningful notification deep links.
 
+### Appearance and account menu
+
+Web provides a light/dark toggle beside the header profile icon and on sign-in.
+Initially it follows the device preference, then remembers an explicit choice
+locally across visits/tabs. The profile icon opens the current account, Profile,
+Switch Google account and Sign out. Google switching prompts for account selection
+using the configured provider and retains the current session until completion.
+Members must finish or discard open drafts before switching or signing out.
+Account changes replace household UI state and request the new account's authorized
+data. One browser has one active session shared across tabs; switching does not
+merge users, memberships or financial records.
+
 ### First-release web quality
 
 - Prioritize Android Chrome and iPhone Safari. Offer installation help on sign-in and Profile, an explicit browser install action when available, home-screen icons, and safe-area spacing. Installation and notification permission are separate choices.
