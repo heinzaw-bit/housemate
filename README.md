@@ -45,9 +45,18 @@ The bell opens the personal notification inbox and settings. Keep the API runnin
 
 The web app includes Android/iPhone installation guidance, a public offline fallback, connection/update notices, interrupted financial-confirmation guidance, accessibility improvements, and deferred workspace loading. See [web release checks](app/QUALITY_CHECKS.md) for verification and the remaining actual-phone acceptance checks. PWA service-worker behavior runs in production, rather than the development server.
 
-## Deploy manually
+## Production and deployment
 
-Import `heinzaw-bit/housemate-api` and `heinzaw-bit/housemate-app` as separate Vercel projects from their repository roots. The API now has a detected Fastify entry point, verified serverless database TLS, and a private scheduler endpoint. The selected setup is Vercel Hobby plus an external minute-level notification scheduler. Follow the [manual deployment guide](api/DEPLOYMENT.md) for the transaction pooler, database CA certificate when required, server-only CRON_SECRET, web/API origins, Auth redirects, scheduler setup, and acceptance. Code preparation is separate from the user's manual deployment; no production origin or scheduler has been created yet.
+The API and web app are deployed as separate projects in Vercel's **DreamyDay** team on Hobby:
+
+| Service | Production URL |
+| --- | --- |
+| Web app | [housemate-app-xi.vercel.app](https://housemate-app-xi.vercel.app) |
+| API health | [housemate-api.vercel.app/health](https://housemate-api.vercel.app/health) |
+
+Both projects build from their independent repository roots and deploy `main` automatically. The API runs in Mumbai (`bom1`) on Node.js 24 with Fluid compute and a project default function duration of 120 seconds. Production database/job credentials are server-only sensitive API variables. The web uses the API HTTPS origin; API CORS allows the exact web origin. The user confirmed saving the production Supabase Site URL and redirect URLs while retaining localhost for development.
+
+HTTPS routes, install/offline assets, API authentication rejection, CORS, and one authorized reminder job with database access were verified. Signed-in household acceptance and actual Android/iPhone installation/offline/update checks remain pending. Live web push still needs a real public contact. The selected external minute-level notification scheduler has **not** been created, so scheduled reminders are not yet running automatically on Vercel. Follow the [deployment guide](api/DEPLOYMENT.md) for a fresh setup and scheduler configuration.
 
 ## Project documents
 
