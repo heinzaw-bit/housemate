@@ -45,6 +45,10 @@ The bell opens the personal notification inbox and settings. Keep the API runnin
 
 The web app includes Android/iPhone installation guidance, a public offline fallback, connection/update notices, interrupted financial-confirmation guidance, accessibility improvements, and deferred workspace loading. See [web release checks](app/QUALITY_CHECKS.md) for verification and the remaining actual-phone acceptance checks. PWA service-worker behavior runs in production, rather than the development server.
 
+## Deploy manually
+
+Import `heinzaw-bit/housemate-api` and `heinzaw-bit/housemate-app` as separate Vercel projects from their repository roots. The API now has a detected Fastify entry point, verified serverless database TLS, and a private scheduler endpoint. The selected setup is Vercel Hobby plus an external minute-level notification scheduler. Follow the [manual deployment guide](api/DEPLOYMENT.md) for the transaction pooler, database CA certificate when required, server-only CRON_SECRET, web/API origins, Auth redirects, scheduler setup, and acceptance. Code preparation is separate from the user's manual deployment; no production origin or scheduler has been created yet.
+
 ## Project documents
 
 - [Product SPEC](SPEC.md): planned features, behavior, release scope, and open product decisions.
