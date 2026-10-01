@@ -133,7 +133,17 @@ merge users, memberships or financial records.
 
 ## Follow-on features
 
-- An AI assistant may answer questions about authorized household data and prepare action drafts. Members review a draft and explicitly confirm it before anything changes.
+### Assistant phase 1 — household questions
+
+- Active members can ask quick questions about their confirmed net balance, unpaid provider bills, household overview, open chores, shopping, upcoming meals/cooking roles, and upcoming events. Answers come from authorized API services, include source links scoped to the selected household, show when they were checked in the household timezone, and disclose bounded lists. Ask again to refresh; earlier answers are snapshots.
+- Optional free-text questions use server-only OpenAI configuration to classify a single supported question. Only that question is sent to the provider; household records, balances, member lists, credentials, and previous answers are not sent. The API validates the classification and produces the answer itself. Today is interpreted in the household timezone. Named balance queries require an exact display-name match; duplicates and unsupported questions need clarification.
+- Bills have provider Paid/Unpaid status, not per-member bill payment status. The assistant does not infer member payment status or calculate financial results from conversation text.
+- Quick questions work without AI credentials and after provider failures or limits. Free text is limited to 1,000 characters, one provider attempt with a 12-second timeout and 400 output tokens, 20 attempts per account per UTC hour, and 200 across the API per UTC day. Failed attempts consume a slot. Usage counters are private and expire; prompts and conversation history are not persisted by HouseMate. Provider requests disable response storage; this does not replace the provider's retention policy.
+- The web keeps up to six answers in memory, clears them on account/household/session changes, supports cancellation without automatic retry, and protects unsent questions from app-update reloads. Record text is rendered as text. Membership is checked before provider use, by each data service, and before returning an answer.
+- Shopping/chore drafts and expense/bill drafts are subsequent phases, still pending. Any future mutation needs an editable validated draft, unresolved-field guidance, explicit confirmation/cancellation, idempotent execution, and an audit record. No assistant mutation endpoint exists in phase 1.
+
+### Other follow-on features
+
 - More advanced recurring bills and chores, digests, receipt handling, richer reports, and LINE messaging can follow the core workflows.
 - Email or SMS reminders can be considered later if the household needs them.
 

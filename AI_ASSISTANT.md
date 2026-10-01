@@ -6,6 +6,14 @@ The AI assistant reduces friction in household coordination.
 
 It must not become the source of financial truth.
 
+## Current implementation — 2026-10-01
+
+Phase 1 is household Q&A. The API owns classification validation and answers; the web offers seven quick questions and optional free text. OpenAI only classifies the user's question using a strict allowlisted schema. It receives no household records or prior conversation. Deterministic API services supply all financial values. Every answer is a timestamped snapshot with household-scoped source links and a bounded-list notice where needed. Exact named balance queries clarify duplicate or missing matches.
+
+Quick topics require no provider key. Free text requires server-only `OPENAI_API_KEY`, optional `OPENAI_MODEL` (default `gpt-4o-mini`), and migration 016 for durable private request counters. There is one bounded provider attempt, no automatic retries, 20 attempts per account per UTC hour and 200 globally per UTC day. Questions are not saved by HouseMate; provider requests use `store: false` without claiming zero retention.
+
+**Next phases:** shopping/chore drafts, then expense/hybrid-bill drafts. Draft storage, editing, unresolved fields, audited idempotent confirmation, and cancellation are not implemented yet. The broader design below is a future plan, not a list of shipped endpoints. Current product behavior is specified in `SPEC.md` and implemented endpoints in `api/openapi.yaml`.
+
 ## AI responsibilities
 
 Allowed:
@@ -41,7 +49,7 @@ Recommended initial intents:
 ### Read-only
 - GET_MY_BALANCE
 - GET_MEMBER_BALANCE
-- GET_UNPAID_BILL_MEMBERS
+- GET_UNPAID_PROVIDER_BILLS (individual member bill payment status is not recorded)
 - GET_TODAY_MEALS
 - GET_TODAY_COOKING
 - GET_DUE_CHORES
@@ -164,7 +172,7 @@ User:
 
 Draft:
 - event title: BBQ
-- tomorrow 19:00
+- ask whether “7” means 07:00 or 19:00, then show the absolute date/time
 - invite all active household members
 - attendance collection enabled
 - notification draft
