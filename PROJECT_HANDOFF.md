@@ -133,7 +133,15 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
-### Public landing page — 2026-10-01 (latest request)
+### Guided landing sections — 2026-10-01 (latest request)
+
+The user requested breaking up the landing page to avoid a long scroll, with a fade effect for each section. `LandingSections` now presents six sections: Overview, Features, How it works, Tour, Privacy and FAQ. One section is visible at a time; header links and Previous/Next controls update the selected section and a 01/06 progress indicator. Sections fade in over 380ms, disabled for reduced motion. The header and pagination remain available on longer phone sections; content can grow rather than being clipped to a fixed height. The redundant problem block and large final panel were condensed; the final household CTA is alongside FAQ.
+
+Hash links, reload and browser Back/Forward restore sections while retaining search parameters and Next.js history metadata. Navigation focuses the selected heading; the skip link focuses the current main content without resetting the section. Hidden panels are excluded from focus/accessibility navigation but stay mounted, preserving the product-tour choice and expanded FAQs. No autoplay or intercepted wheel/touch scrolling was added. Static content remains server-rendered and a noscript style reveals all public sections if JavaScript is disabled. Existing signed-in dashboard/authentication routing is unchanged. README, SPEC and QUALITY_CHECKS cover the behavior. No API changes or new dependency were needed.
+
+Published as app main **`9791adddac3d19ed005a5afde9876c6035b59bce`**. GitHub CI **36819352631** passed clean install, lint, typecheck, all **81 tests in 21 files** and production build. Local production build/lint/typecheck and the final four landing interaction tests also pass. Vercel production **`dpl_57AZXKJQLikwUmhe8QK6rXb1JGtX`** is READY on `https://housemate-app-xi.vercel.app`; public HTTP returns 200 with six panels, five initially hidden, section links and pagination, and all referenced CSS returns 200 with fade/reduced-motion rules. Tests cover one visible section, keyboard/focus/progress, deep links/history, retained tour choices, CTA destinations and skip-link behavior, with structural axe checks on Overview and FAQ. Rendered transitions and Android Chrome/iPhone Safari layouts remain manual acceptance because browser preview tooling has not initialized successfully. Preserve the local generated `next-env.d.ts` development import outside publication.
+
+### Public landing page — 2026-10-01
 
 The user accepted the professional landing-page proposal and requested its implementation. Signed-out `/` now renders a public page headed **House life, in sync.**, with three feature groups, setup steps, an interactive Home/Money/House tour, a privacy overview, native expandable FAQs and sign-in/create-household calls to action. The cream/forest-green design uses the existing light/dark theme and responsive styles. Preview records are fictional, labelled **Example data**, and never read the household API. Footer privacy/use links point to factual on-page information; no binding legal terms, fabricated support address, testimonials, payment processing or unimplemented AI/LINE claims were added.
 
