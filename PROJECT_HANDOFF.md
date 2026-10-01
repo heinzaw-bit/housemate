@@ -133,7 +133,15 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
-### Guided landing sections — 2026-10-01 (latest request)
+### Scroll reveal landing correction — 2026-10-01 (latest request)
+
+The user clarified that visitors should **scroll down naturally**, seeing each section fade in, rather than use a section-by-section wizard. This supersedes the guided presentation below. All six sections now remain in normal document flow, with ordinary header anchors, no Next/Previous controls and no progress counter or intercepted scrolling/history. Desktop sections have generous viewport-based spacing; phone sections grow with their content. A single IntersectionObserver fades upcoming sections in over 600ms and unobserves each after its first reveal, so scrolling back never hides already-read content.
+
+Content is fully visible in server HTML and without JavaScript. Only below-viewport content is prepared for fading after hydration. Keyboard focus reveals its section immediately, and reduced-motion preferences (including changes while open), missing IntersectionObserver or observer setup errors reveal everything. CSS also ensures focused/reduced-motion content stays visible without a transition. Observer/media/focus listeners are cleaned up on unmount. Signed-in dashboard, callback/invitation flows and API behavior are unchanged. README, SPEC and QUALITY_CHECKS now describe natural scrolling. Preserve the local generated `next-env.d.ts` development import outside publication. Actual rendered phone/motion acceptance remains pending because browser preview tooling has not initialized successfully.
+
+Published app main **`e8e8dcb62eec4de2d4cad3db63caf431f1382f4f`**, including the scrolling implementation in `dffa564` and immediate-focus CSS refinement. GitHub CI **36820845778** passed clean install, lint, typecheck, all **84 tests in 21 files** and production build; local checks also passed before the CSS refinement, which passed lint and final CI. Tests cover scroll entry/one-time reveal, focus, changing reduced motion, unsupported/failed observer fallback, cleanup, preserved URL/history, CTAs, product-tour interaction and structural axe. Vercel production **`dpl_ARyieWXFnoWUKMNkv46g3TUi3CWs`** is READY at `https://housemate-app-xi.vercel.app`. Public HTTP returned 200 with six non-hidden sections, no pagination, and healthy CSS including fade/reduced-motion/immediate-focus rules. API main is unchanged.
+
+### Guided landing sections — 2026-10-01 (superseded by scrolling)
 
 The user requested breaking up the landing page to avoid a long scroll, with a fade effect for each section. `LandingSections` now presents six sections: Overview, Features, How it works, Tour, Privacy and FAQ. One section is visible at a time; header links and Previous/Next controls update the selected section and a 01/06 progress indicator. Sections fade in over 380ms, disabled for reduced motion. The header and pagination remain available on longer phone sections; content can grow rather than being clipped to a fixed height. The redundant problem block and large final panel were condensed; the final household CTA is alongside FAQ.
 

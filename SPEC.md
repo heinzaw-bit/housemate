@@ -97,11 +97,12 @@ restored members continue to their dashboard. Invite/household deep links and
 authentication callbacks bypass marketing and preserve the normal access flow.
 Landing content supports light/dark mode, keyboard controls and phone layouts.
 The public page is divided into Overview, Features, How it works, Tour, Privacy
-and FAQ. Show one section at a time with direct navigation, Previous/Next and a
-progress indicator. Fade in each selected section unless reduced motion is
-requested. Keep inactive sections out of the keyboard/accessibility flow;
-section links and browser history restore the selected section. Allow content
-to grow on small screens and fall back to all public content without JavaScript.
+and FAQ along the natural vertical scroll. Fade each upcoming section in as it
+enters view, then keep it visible. Header anchors jump directly to sections;
+there are no Next/Previous controls, progress counters or forced scroll snapping.
+Reduced motion, unavailable animation APIs and keyboard focus keep content
+visible. All sections remain in the document/accessibility flow, grow on small
+screens and are readable without JavaScript.
 
 Web provides a light/dark toggle beside the header profile icon and on sign-in.
 Initially it follows the device preference, then remembers an explicit choice
