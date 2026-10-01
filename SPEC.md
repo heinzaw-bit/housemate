@@ -37,6 +37,14 @@ This document describes intended features and user-visible behavior. It can chan
 - Choose the household's currency and timezone at creation. The owner may change currency before the first confirmed financial record or saved shopping price; afterward it is read-only. Show household settings and membership status.
 - Show a dashboard with balances, pending bills, meals, shopping, chores, events, and important recent activity as each feature becomes available.
 
+### Profile and preferences
+
+- Profile has a compact avatar/name/household/role header and three keyboard-accessible sections: My profile, Household and Preferences. Only one section is shown at a time, including on phones and in the read-only design preview.
+- Personal and household details start as saved summaries. Edit opens a form with Save and Cancel; Save requires a meaningful change. Failed saves retain the draft. Unsaved edits, pending role reviews and in-flight operations protect section changes, normal navigation links, household/account changes and reload/update prompts. Cancel restores saved values and does not write. Browser back/forward and forced termination are not persistent draft recovery.
+- Account email appears inside expandable account details. Account switching and sign-out use the existing session flow. Members are listed by avatar/name/role without email in the main list. Owners explicitly review and confirm admin/member role changes; owner roles remain fixed. Owners/admins can edit household name/timezone; timezone search narrows a supported-value selector. Currency changes retain the existing owner-only and financial-activity restrictions.
+- Household invitations show active links first with expiry and explicit creation/revocation; used, revoked and expired links are behind Show history. Create/join/switch actions live in the global household menu; invitation acceptance retains its existing review. Household settings links open the Household section from other routes or from Profile itself.
+- Preferences offers the shared light/dark toggle, a household-scoped link directly to the existing notification settings (including actual push availability), and existing platform installation help/status. No additional notification subscription or permission is requested by opening Preferences.
+
 ### Home dashboard
 
 - Put a household-wide Needs attention section first with up to three earliest Unpaid bills, the next open chore, and the next meal check. On desktop, Bills to watch, Next chore and Next meal occupy three equal-width, equal-height cards with aligned action footers; they stack naturally on smaller screens. Bills remain ordered by due date. Overdue means before today in the household timezone; due soon means today through seven days ahead, inclusive. Do not imply a household item is assigned to the signed-in member without member-specific data.
