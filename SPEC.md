@@ -25,7 +25,7 @@ This document describes intended features and user-visible behavior. It can chan
 
 ### Brand identity
 
-- The navigation sidebar has no bottom profile block; account controls remain beside the top-bar theme toggle.
+- The navigation sidebar has no bottom profile block; account controls remain beside the top-bar theme toggle. A compact household card opens a working menu with the current household checked, other memberships, Create household, Join with invite and Household settings. Home has no separate household selector. At small-screen widths, the same control belongs to the global header area and opens a modal bottom sheet with safe-area padding. Switching retains the current tab/view and clears old record/create/event-prefill links. Switching/create/join/settings navigation requires finishing or discarding open drafts. Join validates an invite link/code and opens the existing invitation review before acceptance; creating another household retains existing memberships. Settings link to the selected household and retain normal role permissions. Preview disables real create/join actions.
 
 - The Assistant's smiling house mascot is HouseMate's shared logo across navigation, sign-in and the public landing page, alongside the existing wordmark. The same character appears in browser, Android and iPhone app icons, using forest green, a pale background and a gold sparkle. The Assistant's chat-focused layout is retained.
 
