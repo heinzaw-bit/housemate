@@ -133,6 +133,13 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Mascot brand and app icons — 2026-10-01 (latest request)
+
+The user requested using the existing Assistant mascot as the in-app logo and installed app icon. `app/components/housemate-mascot.tsx` now shares the unchanged house-helper drawing between Brand and Assistant. All Brand consumers (landing, auth, onboarding, invitation and navigation) keep the HouseMate wordmark and receive the mascot. Assistant layout/styles are retained. `public/icon.svg` mirrors the character in fixed brand colors; `npm run icons:generate` uses the direct Sharp development dependency to export 192/512 PNGs, a padded opaque Android maskable icon and an opaque 180px Apple icon. Manifest and root metadata icon URLs use `?v=mascot-1`; the installed app identity, start URL and scope are unchanged. No API/provider/database changes.
+
+Web lint/typecheck, all **94 tests in 22 files**, production build and clean-install lockfile dry run passed. Asset verification checked all PNG dimensions, opaque Apple/maskable backgrounds, matching SVG path geometry and existing versioned manifest assets. The maskable character occupies a maximum 188px radius inside the 204.8px safe circle. The normal and maskable exports were visually inspected. React review found no new hooks, fetches, client boundary or focusable decorative SVG. Web main **367449f402403a3b0c297bf93ab96d766f97cb1e** is committed/pushed. GitHub CI **36845790451** passed clean install/lint/typecheck/tests/build. Vercel production `housemate-bxs88caz2-dreamy-day.vercel.app` is READY for that commit at the existing https://housemate-app-xi.vercel.app alias. Production manifest and all five icon assets return 200 and match local files (SVG compared with normalized Git/Windows line endings); public landing HTML includes the smiling mascot and versioned browser/Apple icon metadata. These checks establish asset delivery, not browser/device rendering. Actual rendered/browser and phone installation acceptance remains pending as documented; do not claim OS icon refresh from asset checks. Preserve the generated local `app/next-env.d.ts` dev import outside commits.
+
+
 
 ### Assistant focused chat layout — 2026-10-01 (current layout)
 

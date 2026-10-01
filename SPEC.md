@@ -23,6 +23,10 @@ This document describes intended features and user-visible behavior. It can chan
 
 ## First usable release
 
+### Brand identity
+
+- The Assistant's smiling house mascot is HouseMate's shared logo across navigation, sign-in and the public landing page, alongside the existing wordmark. The same character appears in browser, Android and iPhone app icons, using forest green, a pale background and a gold sparkle. The Assistant's chat-focused layout is retained.
+
 ### Household and members
 
 - Sign in with Google or an email link, edit a display name, and create or join a household through a single-use shareable invitation link that expires after seven days.
