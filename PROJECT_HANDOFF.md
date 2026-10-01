@@ -133,7 +133,17 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
-### Dark mode and Google account menu — 2026-10-01 (latest request)
+### Public landing page — 2026-10-01 (latest request)
+
+The user accepted the professional landing-page proposal and requested its implementation. Signed-out `/` now renders a public page headed **House life, in sync.**, with three feature groups, setup steps, an interactive Home/Money/House tour, a privacy overview, native expandable FAQs and sign-in/create-household calls to action. The cream/forest-green design uses the existing light/dark theme and responsive styles. Preview records are fictional, labelled **Example data**, and never read the household API. Footer privacy/use links point to factual on-page information; no binding legal terms, fabricated support address, testimonials, payment processing or unimplemented AI/LINE claims were added.
+
+Published as app main **`1ddfde3ec7bd89979b0e65b6b6f09d9199be3941`**. GitHub CI **36812247622** passed; Vercel production **`dpl_75i33B3HMFsg9w3kSSW21GQnvkTM`** is READY with the stable `https://housemate-app-xi.vercel.app` alias. Public `/` and `/sign-in` returned HTTP 200; deployed HTML contains the hero, fictional-record labels, sign-in links and sign-in title. Production browser preview again failed to initialize (`failed to write kernel assets`, OS error 3), so this is HTTP/automated verification, not rendered acceptance. API main remains unchanged.
+
+`app/components/home-entry.tsx` retains the existing authenticated root dashboard and invite/callback/error flow, including a stored pending invitation. `/sign-in` uses the existing auth screen and redirects restored signed-in members to `/`. Server-rendered landing children give signed-out visitors meaningful HTML, while authenticated workspaces stay lazy-loaded. The page/tour/previews and scoped `app/app/landing.css` introduce no dependency or API changes. SPEC, app README and QUALITY_CHECKS document the behavior.
+
+Verification: web lint, typecheck, production build and **79 tests in 21 files** passed. Nine new tests cover public CTAs/anchors, structural axe checks, keyboard tour selection, FAQ focus/click expansion, restored sessions/sign-out, invitation/callback intent and sign-in redirection. jsdom does not establish rendered color contrast or native summary keyboard activation. Actual Android Chrome/iPhone Safari layouts, real OAuth callbacks and signed-in rendered acceptance remain pending in QUALITY_CHECKS. Preserve the original generated `app/next-env.d.ts` development routes import outside the commit. Follow-on P3 features remain unchecked; the user switched to this landing-page request before those implementation choices were resolved.
+
+### Dark mode and Google account menu — 2026-10-01
 
 Publication confirmed: web GitHub CI **36766449728** passed; Vercel production **`dpl_HhxzBzL5wpjcBNfYeseHGt37mymF`** is READY on `https://housemate-app-xi.vercel.app`. Stable-origin HTTP returned 200, and public assets include the theme bootstrap, account menu and `select_account` option. The parent main commit records the new web pointer and SPEC; API main remains unchanged by these features.
 

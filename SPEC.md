@@ -89,6 +89,14 @@ This document describes intended features and user-visible behavior. It can chan
 
 ### Appearance and account menu
 
+Signed-out visitors at the root see a public landing page with shared-money,
+daily-coordination and household-updates features, setup steps, an interactive
+product tour, FAQ and a factual privacy overview. Product illustrations use
+explicitly labelled fictional records. Get started/Sign in open `/sign-in`;
+restored members continue to their dashboard. Invite/household deep links and
+authentication callbacks bypass marketing and preserve the normal access flow.
+Landing content supports light/dark mode, keyboard controls and phone layouts.
+
 Web provides a light/dark toggle beside the header profile icon and on sign-in.
 Initially it follows the device preference, then remembers an explicit choice
 locally across visits/tabs. The profile icon opens the current account, Profile,
