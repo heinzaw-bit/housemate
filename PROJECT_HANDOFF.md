@@ -133,6 +133,15 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Sidebar removal, Suggested transfers and balanced attention cards — 2026-10-01 (latest request)
+
+The user clarified that the entire bottom sidebar profile block should be removed, including its divider, avatar and name. The block and its unused CSS selectors are removed; top-bar account controls remain. Suggested transfers now previews two current suggestions in the API's existing calculation order, with its own accessible Show more/Show less button, chevron and unique controlled-region ID. Suggestions have no dates, so no chronology is invented; expansion performs no API reads or financial mutations. Existing source/recorded-transfer previews remain independent.
+
+Home's Bills to watch no longer spans two columns/two rows. Bills, chore and meal cards now form a three-column equal-width/equal-height desktop row, naturally stacked on small screens. Flexible content and dedicated card footers align action links along the bottom; no fixed height or clipped content is introduced. Bills keep the three-record preview and all existing household record links and empty states. API/financial logic and Assistant layout are unchanged.
+
+Web lint/typecheck, all **94 existing tests in 22 files**, and production build passed. React review checked independent suggestion expansion, unique controlled-region IDs, preserved API ordering, flexible card contents/footers, responsive wrapping and retained empty-state links. App main **cff1ef2** is committed locally. Automatic approval review blocked its push: the previous explicit approval covered the earlier UI commits, not these follow-up corrections. This update has not been pushed or deployed. Request explicit approval for this completed app update and whole-project handoff; after approval, push app first, verify GitHub CI/Vercel, then publish the root docs and app pointer. Do not bypass or retry the rejection before approval. Keep generated local `app/next-env.d.ts` development imports outside commits. Signed-in rendering and phone acceptance remain pending as previously documented.
+
+
 ### Compact sidebar, Home and Money — 2026-10-01 (latest request)
 
 The user asked to remove the displayed Gmail address in the sidebar profile, Home quick actions, and add expandable previews to Recorded transfers and Why this balance. The sidebar now shows the avatar/name without the email line. Home's entire Quick actions section and unused imports are removed; normal Money/House add flows remain available. The two Money cards initially show up to three newest records by the existing API source/transfer-date ordering. Separate accessible Show more/Show less buttons with chevrons and unique controlled-region IDs expand loaded history; existing 50-record pagination is shown only while expanded. Switching members resets the balance-source expansion. Recorded transfers are sorted immutably to retain API date ordering after adding a backdated transfer. API-calculated balances, financial confirmation/preview, record deep links and Assistant layout are unchanged.
