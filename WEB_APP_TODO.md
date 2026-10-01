@@ -103,6 +103,8 @@ Use `app/QUALITY_CHECKS.md` for steps and evidence. These manual checks have not
   - [x] Integrate Gemini free-tier classification with server-only configuration, privacy acknowledgement, limited private-input checks and a benign live-provider check.
   - [x] Configure the approved private Gemini key and free-tier confirmation on the production API; deploy API and web.
   - [ ] Verify signed-in production free-text questions on both target phones.
+  - [x] First action release: local meal-check and announcement drafts, missing-detail guidance, editable recipients/content, exact review, explicit normal-API publication, scope isolation and same-key interrupted-confirmation retry.
+  - [ ] Verify signed-in meal/announcement draft publication and actual notifications on Android Chrome and iPhone Safari.
   - [ ] Phase 2: shopping/chore drafts with unresolved fields, edit/confirm/cancel, audited idempotent execution.
   - [ ] Phase 3: expense/hybrid-bill drafts using existing deterministic previews and confirmations.
 - [ ] Add natural-language expense and hybrid-bill drafting only after the manual money flows are reliable; use the API's deterministic preview for final amounts.
