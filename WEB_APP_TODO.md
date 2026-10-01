@@ -97,17 +97,19 @@ Use `app/QUALITY_CHECKS.md` for steps and evidence. These manual checks have not
 
 ## P3 — Follow-on features after the core release
 
-- [ ] Add search across household records once the core modules and API search contract exist.
-- [ ] Add an assistant for authorized read-only questions and action drafts. Show unresolved fields and require an explicit edit/confirm/cancel step before any write.
+- [x] Add search across household records once the core modules and API search contract exist. Global dialog, nine saved record types, literal text/type filters, authorized API cursor pages and record links implemented; signed-in/device rendering remains a manual acceptance check.
+- [x] Add an assistant for authorized read-only questions and action drafts. Show unresolved fields and require an explicit edit/confirm/cancel step before any write. Six draft kinds implemented and deployed; signed-in/device acceptance remains pending below.
   - [x] Phase 1: authorized household Q&A with quick topics, optional server-side natural-language classification, deterministic answers, source links, clarification, bounded lists, and private usage limits.
   - [x] Integrate Gemini free-tier classification with server-only configuration, privacy acknowledgement, limited private-input checks and a benign live-provider check.
   - [x] Configure the approved private Gemini key and free-tier confirmation on the production API; deploy API and web.
   - [ ] Verify signed-in production free-text questions on both target phones.
   - [x] First action release: local meal-check and announcement drafts, missing-detail guidance, editable recipients/content, exact review, explicit normal-API publication, scope isolation and same-key interrupted-confirmation retry.
   - [ ] Verify signed-in meal/announcement draft publication and actual notifications on Android Chrome and iPhone Safari.
-  - [ ] Phase 2: shopping/chore drafts with unresolved fields, edit/confirm/cancel, audited idempotent execution.
-  - [ ] Phase 3: expense/hybrid-bill drafts using existing deterministic previews and confirmations.
-- [ ] Add natural-language expense and hybrid-bill drafting only after the manual money flows are reliable; use the API's deterministic preview for final amounts.
+  - [x] Phase 2: shopping/chore drafts with unresolved fields, edit/confirm/cancel, creator/time/key/hash trace and durable idempotent execution.
+  - [x] Phase 3: expense/hybrid-bill drafts using existing deterministic previews and confirmations. All expense split methods and explicit bill charge/credit types are supported.
+  - [x] Apply the additive action-create migration and release API before web (2026-10-02); both exact-commit deployments reached READY and both CI runs passed.
+  - [ ] Verify signed-in shopping/chore/money draft confirmations and notifications on both target phones.
+- [x] Add natural-language expense and hybrid-bill drafting only after the manual money flows are reliable; use the API's deterministic preview for final amounts. Conservative local commands propose editable fields; ambiguous amounts/participants/adjustments require explicit input, and all shares come from the API.
 - [ ] Add richer recurrence, digests, receipt handling, and reports as those product choices and API endpoints are defined.
 - [ ] Prepare strings for localization; English is first, with Thai and Burmese possible later.
 - [ ] Add LINE account-linking and messaging controls if LINE integration is released. Email and SMS notification controls can follow if needed.
