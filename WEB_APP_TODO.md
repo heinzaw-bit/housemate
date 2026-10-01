@@ -100,7 +100,9 @@ Use `app/QUALITY_CHECKS.md` for steps and evidence. These manual checks have not
 - [ ] Add search across household records once the core modules and API search contract exist.
 - [ ] Add an assistant for authorized read-only questions and action drafts. Show unresolved fields and require an explicit edit/confirm/cancel step before any write.
   - [x] Phase 1: authorized household Q&A with quick topics, optional server-side natural-language classification, deterministic answers, source links, clarification, bounded lists, and private usage limits.
-  - [ ] Activate and verify live free-text questions after configuring a private OpenAI API key; test on both target phones.
+  - [x] Integrate Gemini free-tier classification with server-only configuration, privacy acknowledgement, limited private-input checks and a benign live-provider check.
+  - [x] Configure the approved private Gemini key and free-tier confirmation on the production API; deploy API and web.
+  - [ ] Verify signed-in production free-text questions on both target phones.
   - [ ] Phase 2: shopping/chore drafts with unresolved fields, edit/confirm/cancel, audited idempotent execution.
   - [ ] Phase 3: expense/hybrid-bill drafts using existing deterministic previews and confirmations.
 - [ ] Add natural-language expense and hybrid-bill drafting only after the manual money flows are reliable; use the API's deterministic preview for final amounts.

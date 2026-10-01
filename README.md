@@ -41,7 +41,7 @@ You need Node.js 22 or newer, npm, and a Supabase project. The API needs a Postg
 
 The design preview is for browsing the interface. Household creation and live data require configured Supabase Auth, the API, and the database migrations.
 
-Assistant now answers household questions with source links and checked timestamps. Quick questions about balances, bills, chores, shopping, meals, events, and the household overview work without AI configuration. Optional free text needs a private OpenAI key on the API only; see the [assistant setup guide](api/README.md#optional-natural-language-questions). Action drafting is the next phase and remains pending.
+Assistant now answers household questions with source links and checked timestamps. Quick questions about balances, bills, chores, shopping, meals, events, and the household overview work without AI configuration. Optional general free text uses Gemini’s free tier with a private API key, operator billing-tier confirmation and a member privacy acknowledgement; see the [assistant setup guide](api/README.md#optional-natural-language-questions). Action drafting is the next phase and remains pending.
 
 The bell opens the personal notification inbox and settings. Keep the API running for scheduled reminders. Optional live web push needs server-only VAPID keys and a real public contact email or HTTPS support URL; it is currently disabled because no contact is available. The inbox, reminders, and category/quiet-hours preferences work independently of push. See the [push setup guide](api/README.md#notifications-and-optional-web-push).
 
