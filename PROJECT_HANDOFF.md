@@ -133,6 +133,103 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Header/search and Android header fix — published 2026-10-03
+
+The user authorized deployment. App main is now
+`20f09817c798d8d8625d0d0bbe3cdacc6c0476af`, including matching header controls,
+compact household search, the single search focus outline, search beside the
+breadcrumb/mascot, plain notification/theme buttons, and the Android wrapping
+fix below. Vercel production `dpl_5SrR4Kz4RM14WE37bzHFNijAa9U2` is READY and
+serves `https://housemate-app-xi.vercel.app`. All ten canonical web route/PWA
+HTTP checks returned 200. Local lint, production build (including TypeScript),
+and all **157 tests in 27 files** passed. GitHub CI **37114836743** also passed
+clean installation, lint, typecheck, tests and production build.
+The discarded Money redesign is not
+included; API code and deployment are unchanged. Only the app code, shared
+product documentation and app submodule pointer are included in publication;
+unrelated local API docs, generated files and attachments are preserved.
+
+The user reported the Android logo and header controls wrapping onto two rows.
+The old mobile flex-wrap rule is removed. Up to 900px the header now uses two
+grid columns, with logo/search at the left and notification/theme/account at
+the right. Up to 650px only the mascot is shown; all controls retain 44px touch
+targets, 8px spacing, theme styling and safe-area gutters. This extends the
+earlier local header/search work and preserves the restored Money layout.
+Android visual acceptance remains separate from lint/build checks. Ask the user
+to finish any open drafts, accept the app update/reload, and check the header on
+the affected phone; do not claim an actual-device visual test was performed.
+
+### Money redesign discarded — 2026-10-03
+
+The user rejected the minimal Money redesign and requested deleting its branch.
+Money components, API scope/filter changes, tests and documentation were reverted.
+The earlier header/search changes and API monitoring documentation were preserved.
+Root, app and API return to main; `codex/minimal-money-tabs` is removed locally.
+The feature was never committed, pushed, merged or deployed.
+Money-only tracked files match main again and feature-only components/tests were
+removed. Web lint and production build, and API build passed after restoration.
+Generated `next-env.d.ts` was restored to its prior local state.
+
+### Search outline and header refinement — 2026-10-03 (latest local work)
+
+The user requested removal of the layered search outline and no circles on
+Notifications or Theme. Their subsequent screenshot clarified Search should
+sit beside the left page breadcrumb, rather than at the far right. A shared
+left group places Search after the breadcrumb on desktop and after the brand
+on phones, while date/Notifications/Theme/Account stay on the right.
+The search input now suppresses its
+own focus decoration while its wrapper provides a single contiguous outline.
+Header DOM/tab order is Search, Notifications, Theme, Account. Bell and theme
+controls (including preview) have transparent backgrounds and no border, with
+44px touch targets, hover feedback and keyboard focus indication retained.
+These edits refine the two local updates below. Lint, typecheck and 22 relevant
+search, notification-popup, account-menu and theme tests passed.
+The subsequent Search placement adjustment passed affected-file lint and
+typecheck; it did not change search behavior. Phone visual
+acceptance remains pending. No commit or deployment was requested. Preserve
+unrelated generated/test/API docs.
+
+### Compact search panel — 2026-10-03 (latest local work)
+
+The user approved the minimal search recommendation. The panel now has a Search
+heading and small household label, prominent focused input, compact All records
+selector and a one-character-only minimum-length hint. Initial empty search
+omits the large illustration and session-storage/sorting explanation. Results
+have category icons, titles, status, one-line previews and subtle dates at the
+right (dates wrap below on narrow screens). The whole result remains a link.
+Desktop height follows contents up to a cap. Phones use a safe-area-aware bottom
+sheet with non-scrolling controls above results; visualViewport resize/scroll
+updates its available height and keyboard offset while open.
+
+Changed `app/components/household-search.tsx`, its CSS module and an existing
+search test (conditional minimum-length help and clear-search focus/row reset).
+The API search contract, debounce/IME, scope checks, request cancellation,
+pagination, draft navigation protection and query privacy remain intact.
+Lint/typecheck, all 157 tests and the production build passed. Actual
+phone keyboard/visual acceptance remains pending. This and the preceding header
+control update are local and not committed/deployed. Preserve pre-existing
+generated/test changes and the API monitoring documentation edits.
+
+### Matching header controls — 2026-10-03 (latest local work)
+
+The user approved matching Search, Notifications, Theme and Account icons and
+the phone spacing fix. All four now share `header-icon-button` styling: 44px
+circles, 20px/2px Lucide outlines, theme-aware soft green backgrounds, 8px gaps,
+focus rings and labels/tooltips. Search drops its visible text; Account replaces
+the initial with UserRound and retains the initial/name/email in its menu. The
+notification badge sits inside the corner. Preview shows a disabled matching
+bell instead of an inert unlabelled span. Shared styles prevent shrinking and
+keep 16px/safe-area phone gutters; up to 420px the mobile wordmark is hidden while
+the existing mascot stays visible so all four controls fit on one row.
+
+Changes are confined to web components/styles and setup/product documentation.
+Search shortcuts/dialog behavior, theme persistence, inbox links/read counts,
+account switching and sign-out are unchanged. Web lint, typecheck, all 157 tests
+and production build passed. Real Android visual acceptance remains pending.
+Not committed or deployed.
+Preserve pre-existing `next-env.d.ts`, `tests/member-settings.test.tsx` and the
+API monitoring doc edits.
+
 ### Minimal notification layout — 2026-10-03 (latest implementation)
 
 The user approved the cleaner Notifications recommendation. Local web changes
