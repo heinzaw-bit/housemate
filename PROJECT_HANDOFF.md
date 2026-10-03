@@ -133,6 +133,53 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Focused Money views — feature branch 2026-10-03
+
+The user requested a new branch to implement the compact-preview recommendation.
+Root and app are on `codex/money-focused-records`; API remains on main and has no
+new source/contract changes. Bill/expense history shows three rows in existing
+API date order, with View all opening the full paginated list. Clicking a record
+opens a focus-trapped desktop side panel or mobile full-screen view; Back returns
+to the originating list. Total, status and shares stay visible, while Details
+contains metadata/adjustments and Activity lazily loads financial change history.
+Edit closes the panel and focuses the existing preview form. Removal drafts
+block Escape/outside/close and preserve their input; in-flight actions also block
+closing. Open forms disable View all and prevent selecting other records.
+
+Balances now uses a short Why this balance explanation and View breakdown for
+the selected member's paginated sources (with failure retry), two suggestions
+plus View all suggestions, and three compact recorded transfers plus View all
+transfers with audit details and pagination. Existing API previews, confirmation
+retry keys, role permissions and money calculations are unchanged. The prior
+household-selector cleanup is retained on this branch. SPEC and app README are
+updated. Web lint, typecheck, all **166 tests in 28 files**, and production build
+passed. Nine new flow tests cover full-list navigation, page failure/retry,
+records beyond the first 50, direct links, lazy activity, detail structural axe
+checks, edit focus, draft-preserving Escape/cancel and balance focused views.
+Rendered Android/iPhone acceptance is still pending; browser tooling has been
+blocked previously. This branch is local; main and production are unchanged.
+Unrelated generated files, API documentation and attachments remain outside
+the feature commits. Do not push, merge or deploy this branch without the user's
+next instruction.
+
+App implementation is saved in local branch commit
+`17c2e7bd616ba32f839166a39062d89d3d03d560`. App main remains
+`9d9d5cd8c79e3df0b7f359e9768c7521772fd975`. The matching root branch records
+this app revision and shared documents. No remote branch or deployment was
+created. Switch back to the feature branch for local review before modifying it.
+
+### Minimal household selector — local 2026-10-03
+
+The user requested a cleaner household selector. The shared desktop/mobile
+trigger now uses a single-line household name, 32px green initial badge and
+16px chevron in a transparent 56px-minimum row, with themed hover/open feedback.
+The uppercase caption, filled outer card and heavy type are removed. Focus,
+disabled state, long-name ellipsis and reduced-motion behavior remain supported.
+Menu/bottom-sheet actions and draft guards are unchanged. SPEC and app README
+are updated. Web lint, typecheck, CSS formatting and all six existing household
+menu tests passed. This change is local, uncommitted and not deployed; actual
+phone visual acceptance remains pending.
+
 ### Money cards and profile avatar release — 2026-10-03
 
 The user authorized committing and deploying the four local UI changes below:
