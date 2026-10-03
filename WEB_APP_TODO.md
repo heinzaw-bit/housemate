@@ -118,13 +118,15 @@ Use `app/QUALITY_CHECKS.md` for steps and evidence. These manual checks have not
 ## Household rollout operations — 2026-10-03
 
 - [x] Activate the production web push sender with the approved existing key pair.
-- [ ] Verify actual Android/iPhone closed-app delivery and exact notification links (phone receipt reported working 2026-10-03; Android Chrome tap navigation reported failing, fix awaiting phone retest; iPhone-specific result not recorded).
+- [x] Verify Android Chrome phone push delivery and notification-tap app opening (user confirmed after the 2026-10-03 fix).
+- [ ] Verify iPhone Home Screen closed-app delivery and exact notification links (iPhone-specific result not yet recorded).
 - [x] Repair web uptime monitoring using a small production runtime health endpoint; scheduled recovery verified.
 - [x] Run an isolated owner-alert failure/recovery test and remove its temporary job.
 - [ ] Confirm actual owner alert emails and configure/verify Sentry issue alerts (user deferred Sentry access).
 - [x] Create a fresh encrypted backup and verify the complete 66-table local restore, financial API checks and recovery SQL.
 - [x] Implement private offsite backup storage/scripts and the guarded daily/weekly GitHub workflow.
-- [ ] Approve/provision private GitHub backup secrets, enable the schedule and verify an initial downloaded offsite restore.
+- [x] Approve/provision private GitHub backup secrets, enable the schedule and verify an initial downloaded offsite restore (cloud run 37089625945, 66 tables, 2026-10-03).
+- [ ] Confirm the first daily scheduled backup and enable/verify owner GitHub Actions failure emails; preserve a separate protected recovery-key copy.
 
 ## Completion rule for every item
 

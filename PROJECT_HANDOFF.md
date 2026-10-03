@@ -133,7 +133,50 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Offsite backup activation — 2026-10-03 (latest completed work)
+
+The user explicitly approved private backup setup/activation and confirmed only
+Android has been push-tested; iPhone remains pending. Private DreamyDay store
+`housemate-backups` is now connected only to API Development with prefix
+`BACKUP_OFFSITE`; Vercel generated `BACKUP_OFFSITE_READ_WRITE_TOKEN` (not a
+`_BLOB_` name). The connection POST returned empty success; metadata was checked
+before continuing, and the connection write was not repeated. Its token, the
+existing production database URL and retained recovery key were provisioned as
+the three prepared private API GitHub Actions secrets. The verified activation
+flag is true. No secret was printed, committed, stored in Blob or web variables.
+
+Initial cloud run 37089252729 uploaded a verified private archive at 09:17:41
+Bangkok, but its Linux restore failed. That downloaded archive restored locally
+at 09:22:13 with all 66 tables/checks and recovery SQL passing. API main
+`5d28806021422976fa15b08ae0062791bb677e26` disables system Unix sockets for the
+isolated loopback cluster and adds static restore-stage diagnostics. It passed
+lint/typecheck, 75 tests/build and clean CI 37089625330. Its Vercel deployment
+`housemate-ckfzqc5ru-dreamy-day.vercel.app` reached READY; public health/readiness,
+protected-route rejection and CORS passed.
+
+Cloud rerun 37089625945 succeeded: captured 09:23:53, full downloaded-archive
+restore passed 09:25:11 (66 tables, exact counts/digests, Auth references, RLS,
+financial/history checks and recovery SQL). Private inventory is fresh with one
+498,706-byte encrypted archive. Daily around 03:17 Bangkok is active; weekly
+Saturday/manual restore checks are active. The first scheduled run, GitHub
+failure email receipt, separate key preservation and managed Supabase/Auth
+cutover remain unverified. No Storage object bytes exist/are backed up.
+
+Sentry token-versus-dashboard preference is still unanswered; account access
+and actual alert email receipt remain required. No Sentry token is available.
+The manual operator checklist in `api/OPERATIONS.md` explains GitHub failure
+notifications, separate recovery-key storage, cron-job.org test emails around
+08:10–08:13 Bangkok, Sentry setup and iPhone acceptance. Do not re-ask for backup
+secret transfer approval or redo successful initial cloud verification.
+
 ### Notification tap navigation — 2026-10-03 (latest report)
+
+**Latest acceptance:** after the deployed fix, the user confirmed notification
+taps now work. Android Chrome delivery and opening are user-verified. A question
+is pending about whether iPhone was also tested; do not infer that it passed.
+The user now requests completion of the unfinished backup/monitoring work and
+manual instructions. Backup-secret transfer/activation was subsequently approved
+and completed above. Sentry token versus dashboard preference remains pending.
 
 The user confirms phone push delivery works, but tapping does not go straight to
 the app; they identified Android Chrome. Exact post-tap behavior is still being
@@ -164,11 +207,11 @@ tests and build). Sanitized Vercel error/5xx checks returned zero entries in the
 instruct the user to open the installed app, finish drafts, accept Reload if
 offered, then tap a fresh notification with the receiving app closed.
 
-The earlier backup activation secret-transfer question remains unanswered. This
-push report does not authorize GitHub backup secrets or cloud activation. Sentry
-alert access and actual owner email receipt remain deferred by the user.
+The push report itself did not authorize GitHub backup secrets; separate approval
+was subsequently obtained and activation completed above. Sentry alert access
+and actual owner email receipt remain pending.
 
-### Backup automation and monitoring — 2026-10-03 (latest request)
+### Backup automation and monitoring — 2026-10-03 (progress before activation)
 
 The user requested push delivery acceptance, then automated offsite backups and
 monitoring alert verification. They deferred phone checks because the phones are

@@ -212,14 +212,17 @@ readiness remains a separate endpoint. Uptime monitors use these checks rather
 than downloading the landing page. An isolated owner-alert failure/recovery
 drill never interrupts household services. Actual email receipt, Sentry alerts
 and notification-tap links on both target phones remain manual acceptance items.
-The user confirmed phone push receipt on 2026-10-03 and reported Android Chrome
-tap navigation failing; iPhone-specific delivery acceptance is not yet recorded.
+The user confirmed Android Chrome phone push receipt and successful app opening
+after the 2026-10-03 notification-tap fix. iPhone-specific acceptance is not yet
+recorded.
 
 Offsite backup automation is implemented with private encrypted Vercel Blob
 storage and a guarded daily GitHub Actions workflow, bounded retention and
 verified-download checks before cleanup. Weekly/initial restore drills use a
-fresh isolated database. Cloud activation and secret transfer remain pending;
-the fresh local 66-table restore and recovery SQL are verified. Storage object
+fresh isolated database. Approved private credential provisioning and daily
+03:17 Bangkok scheduling are active as of 2026-10-03. The first manual cloud
+backup and downloaded-archive 66-table restore/recovery SQL passed; the first
+scheduled execution and owner email receipt remain separate checks. Storage object
 bytes require separate backup before file uploads can be considered covered.
 
 ## Open product decisions
