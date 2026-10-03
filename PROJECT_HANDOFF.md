@@ -133,6 +133,36 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Money views corrected to inline text toggles — 2026-10-03
+
+The user rejected separate View all views and asked for expansion inside the
+components using labelled buttons instead of arrows. On the existing local
+`codex/money-focused-records` branch, the original desktop list/detail cards and
+mobile Back behavior are restored. Bill/expense history previews three records
+and expands inline with View all bills/expenses, then Show less. Details use
+Hide details/View details and remain mounted to preserve confirmation drafts;
+selecting a record opens the detail. Why this balance and Recorded transfers
+retain three-entry previews; Suggested transfers retains two. View all
+sources/transfers/suggestions and Show less independently expand each card
+inline, with pagination available while expanded and no chevron arrows.
+The new side panels, separate full-list dialogs and Details/Activity tabs are
+removed. Financial history keys are prefixed to avoid sibling collisions with
+removal drafts. The household-selector cleanup remains on this branch.
+
+SPEC and app README are reconciled with this correction. Web lint, typecheck,
+all **164 tests in 28 files**, and production build passed. Seven branch flow
+tests now verify inline keyboard controls, no dialogs, selection/detail state,
+draft retention, pagination failure/retry and independent balance expansion.
+This supersedes the focused-view design described below. Main and production
+remain unchanged; no push, merge or deployment is authorized by this request.
+Actual phone visual acceptance remains pending. Preserve unrelated generated
+files, API documentation and attachments outside the branch commits.
+
+The corrected app is saved locally in branch commit
+`20aeed3aeb40e16add08f9fc605f3d2b67cab1a4`; the matching root branch records
+that revision. This supersedes app branch commit `17c2e7b` below. Neither branch
+has been pushed, and the deployed app still uses main `9d9d5cd`.
+
 ### Focused Money views — feature branch 2026-10-03
 
 The user requested a new branch to implement the compact-preview recommendation.
