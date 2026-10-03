@@ -1,7 +1,7 @@
 # HouseMate product specification
 
 Status: evolving product scope  
-Last updated: 2026-10-01
+Last updated: 2026-10-02
 
 ## Production reliability
 
@@ -101,7 +101,7 @@ This document describes intended features and user-visible behavior. It can chan
 - Optional quiet hours use the household timezone, support overnight windows, and delay every push priority until the window ends. They do not hide the inbox. Defaults suggest 23:00–07:00 with quiet hours initially disabled. A delayed reminder is skipped if it has expired, been answered, or been read.
 - Web push is explicit opt-in after an explanation of its value and privacy. Do not open a permission request automatically. Show instructions for browser denial or unsupported platforms. Devices belong to the account across households, with up to ten active devices; members can disable them, and signing out removes the current browser subscription. Refresh an existing subscription on a signed-in visit; missing subscriptions require explicit Enable again, and remote-disabled devices are never silently re-enabled. Expired provider subscriptions are disabled; transient errors have bounded retries.
 - Lock-screen title and body are generic: no financial amounts, household names, or private message text. Push links stay on the app origin and require authentication and authorized household access. Newly enabled devices receive only subsequent updates. Provider acceptance can be ambiguous during retries; notification tags coalesce duplicate deliveries, but device delivery is not guaranteed.
-- Live web push requires a real server contact email or HTTPS support URL, server-only VAPID private key, and a supported secure browser context. Until configured, the inbox, reminder generation, and preferences work and the web screen explains why push is unavailable. Production requires HTTPS; some mobile browsers require an installed PWA. Native mobile push, email, SMS, and LINE delivery are not implemented in this slice.
+- Live web push requires a real server contact email or HTTPS support URL, server-only VAPID private key, and a supported secure browser context. Until configured, the inbox, reminder generation, and preferences work and the web screen explains why push is unavailable. Production requires HTTPS; some mobile browsers require an installed PWA. Production VAPID/contact configuration was activated on 2026-10-02; each member must still explicitly enable each device, and real-device delivery acceptance remains separate from server activation. Native mobile push, email, SMS, and LINE delivery are not implemented in this slice.
 
 ### Web and mobile experience
 
@@ -204,6 +204,21 @@ merge users, memberships or financial records.
 5. Web and mobile show the same confirmed balance and bill state after an API update.
 6. A notification opens the relevant item and respects the member's preferences.
 7. When AI is released, an AI draft changes no household record until a member reviews and confirms it.
+
+## Production operations follow-up (2026-10-03)
+
+The web exposes a small public, no-store `/api/health` runtime check; API database
+readiness remains a separate endpoint. Uptime monitors use these checks rather
+than downloading the landing page. An isolated owner-alert failure/recovery
+drill never interrupts household services. Actual email receipt, Sentry alerts
+and background push on both target phones remain manual acceptance items.
+
+Offsite backup automation is implemented with private encrypted Vercel Blob
+storage and a guarded daily GitHub Actions workflow, bounded retention and
+verified-download checks before cleanup. Weekly/initial restore drills use a
+fresh isolated database. Cloud activation and secret transfer remain pending;
+the fresh local 66-table restore and recovery SQL are verified. Storage object
+bytes require separate backup before file uploads can be considered covered.
 
 ## Open product decisions
 

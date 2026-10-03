@@ -2,7 +2,7 @@
 
 Ordered from highest to lowest priority. This is a web app checklist, not the API or mobile implementation plan. Complete a live feature only when its endpoint is defined in `api/openapi.yaml` and the web app uses real API data. Keep the existing honest empty states until then.
 
-Current foundation: household onboarding, money, meals, shopping, one-off chores, events, announcements, polls, personal notifications, preferences, and first-release web quality improvements are implemented. Live push awaits a real public server contact. Actual signed-in phone and accessibility acceptance remains separate from automated verification.
+Current foundation: household onboarding, money, meals, shopping, one-off chores, events, announcements, polls, personal notifications, preferences, and first-release web quality improvements are implemented. Production push configuration is enabled as of 2026-10-02; each device still needs explicit opt-in. The user reports joining/sign-in and core phone flows tested with household members; specific push, accessibility and other acceptance checks remain separate.
 
 ## P0 — Make the core household usable
 
@@ -79,7 +79,8 @@ Current foundation: household onboarding, money, meals, shopping, one-off chores
 - [x] Add an in-app notification/activity feed with read state and links to related records. Includes unread bell, All/Unread, cursor pages, individual/bounded bulk read, transactional activity, and deduplicated scheduled reminders.
 - [x] Add category preferences and quiet-hours controls through the authorized API. Preferences are personal per household; quiet hours delay all push priorities in the household timezone.
 - [x] Add web push opt-in, denial guidance, existing-subscription refresh, device removal, and safe deep links with generic lock-screen text. Durable delivery, retry, quiet deferral, and expired-device handling passed simulated-transport database checks.
-- [ ] Enable live web push once a real public contact email or HTTPS support URL is available, then check a real device with the app closed, a denied permission, and a notification deep link. The user currently has no contact to configure; push stays disabled. Signed-in visual acceptance also remains unverified because browser access was denied.
+- [x] Enable production web push using the user-provided contact and explicitly approved server-only VAPID configuration; API redeployment reached READY on 2026-10-02 and scheduled worker runs remain healthy.
+- [ ] Confirm real Android/iPhone push delivery with the app closed, denied-permission guidance, and an authorized notification deep link. User opt-in and delivery confirmation are pending; simulated tests and deployment checks do not establish actual delivery.
 
 ## P2 — Finish first-release quality
 
@@ -113,6 +114,17 @@ Use `app/QUALITY_CHECKS.md` for steps and evidence. These manual checks have not
 - [ ] Add richer recurrence, digests, receipt handling, and reports as those product choices and API endpoints are defined.
 - [ ] Prepare strings for localization; English is first, with Thai and Burmese possible later.
 - [ ] Add LINE account-linking and messaging controls if LINE integration is released. Email and SMS notification controls can follow if needed.
+
+## Household rollout operations — 2026-10-03
+
+- [x] Activate the production web push sender with the approved existing key pair.
+- [ ] Verify actual Android/iPhone closed-app delivery and exact notification links (user deferred).
+- [x] Repair web uptime monitoring using a small production runtime health endpoint; scheduled recovery verified.
+- [x] Run an isolated owner-alert failure/recovery test and remove its temporary job.
+- [ ] Confirm actual owner alert emails and configure/verify Sentry issue alerts (user deferred Sentry access).
+- [x] Create a fresh encrypted backup and verify the complete 66-table local restore, financial API checks and recovery SQL.
+- [x] Implement private offsite backup storage/scripts and the guarded daily/weekly GitHub workflow.
+- [ ] Approve/provision private GitHub backup secrets, enable the schedule and verify an initial downloaded offsite restore.
 
 ## Completion rule for every item
 

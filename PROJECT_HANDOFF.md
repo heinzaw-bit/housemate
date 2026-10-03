@@ -133,6 +133,83 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Backup automation and monitoring — 2026-10-03 (latest request)
+
+The user requested push delivery acceptance, then automated offsite backups and
+monitoring alert verification. They deferred phone checks because the phones are
+unavailable and deferred Sentry alert-token setup, asking to continue work that
+needs no manual intervention. Push remains enabled; real device receipt/deep
+links and Sentry/email receipt must remain unchecked.
+
+Web uptime job 8546967 was disabled with status 6 (response too large). The
+landing page returned 200 with 66,264 bytes; HEAD also failed at the provider.
+New web `GET /api/health` is a small 41-byte, no-store Next.js runtime check.
+App main `eb87edc82e600722fe83dca502e806f786a092d7` passed lint/typecheck, all
+142 tests and build; clean GitHub CI 37085290465 succeeded and Vercel production
+deployment `dpl_4TpXjk9YAp67hhyUrvx1PzRRjvKX` reached READY at
+`housemate-p6bvps6uo-dreamy-day.vercel.app`, with canonical web alias unchanged.
+The existing web monitor was migrated in place to that endpoint and recorded
+scheduled HTTP 200 at 08:20:03 Bangkok (747 ms). API readiness and reminder job
+8546464 remained healthy. Do not replace an unrelated monitor or invoke the
+notification worker as a test.
+
+Isolated temporary alert job 8567732 used an unknown API path (404), then public
+`/health` (200), with account-owner email settings and no credentials. Scheduled
+failure at 08:10:36/08:11:02 and recovery at 08:12:17/08:13:02 were verified;
+the job was deleted after recovery. Actual emails remain unverified. Repeatable
+`uptime:alert-*` commands preserve sanitized local evidence and expire tests after
+one hour using the provider's YYYYMMDDhhmmss local-time format.
+
+A fresh encrypted production backup was captured at 08:15:47, 66 tables and
+zero Storage objects. The existing recovery key had an empty Windows access
+list. Owner-only Read access was restored using native ACL tooling for MSI\\ADMIN
+on that single key; no inheritance/group access was enabled and no key rotated.
+The complete isolated restore passed at 08:25:04 in 16 seconds: all counts and
+digests, Auth references, private-table RLS, three API/financial smoke checks,
+and recovery SQL against provisioned managed schemas. PostgreSQL extraction
+needed explicit `--file=-`; schema-filtered SQL also needed namespace creation.
+Those fixes apply to both drills and unpacking. Managed Supabase/Auth service
+cutover is not claimed complete.
+
+Private DreamyDay Vercel Blob store `housemate-backups`, ID
+`store_tVVZomZrIaTQi403`, bom1, exists with no project connections. API offsite
+scripts implement encrypted private uploads, download/decryption/checksum and
+anonymous-denial verification before retention (7 daily/4 weekly/3 monthly,
+Bangkok buckets, maximum 14 overlapping points, only owned strict paths). The
+store budget is 256 MiB and an unattended archive is capped at 16 MiB; nonzero
+Storage objects block validation until object bytes are backed up separately.
+The API GitHub workflow is prepared for daily 03:17 Bangkok and initial/manual
+plus Saturday isolated restore checks. It remains gated by repository variable
+`BACKUP_AUTOMATION_ENABLED` until credentials and a successful initial cloud run
+are verified. **No offsite archive or unattended cloud run is verified yet.**
+API main `3af2ba05eb5f0efa934329e4870232164ce2b37b` is published. Clean API CI
+37086450067 passed lint/typecheck, 75 tests (62 TypeScript plus 13 operations),
+and build; the backup workflow is registered as 373608794 with zero runs.
+The API deployment `dpl_2xzeSW9LRK1rc8CoMpAxNXHHuFQm` is READY at
+`housemate-okmnr15oz-dreamy-day.vercel.app` with the canonical API alias unchanged.
+Public health/readiness, protected-route rejection and CORS checks passed after
+publication; the previously approved VAPID configuration remains in production.
+Store read/write credentials are not exposed by the available Vercel connector;
+browser initialization also failed. An explicit approval question is pending:
+connect only the new backup store to API Development, read only its generated
+server token, and provision the existing database URL/recovery key plus store
+token as private API GitHub Actions secrets, then activate and verify an initial
+offsite run. This avoids manual dashboard setup if the approved CLI path works.
+Do not read/decrypt that new environment value or transfer secrets before this
+approval, and do not reuse the earlier VAPID/Gemini consent. Keep the recovery key
+separate from Blob and Git.
+See `api/OPERATIONS.md` for activation and verification. Preserve the pre-existing
+generated web type-file difference and member-settings line-ending change.
+
+### Production web push enabled — 2026-10-02 (latest request)
+
+The user reports completing rollout priorities 1 and 2 (joining/sign-in and core phone flows) with household members, and requested priority 3: enable live web push. This report does not establish every separate accessibility, performance or Assistant edge-case acceptance check. The user supplied a real email contact and explicitly approved transferring the existing VAPID private/public key pair and that contact to DreamyDay housemate-api production, then redeploying. Automatic approval review initially rejected the secret transfer; it proceeded only after that explicit consent. Contact and key values remain only in server configuration and ignored local environment files; do not copy them into tracked documents or outputs. Existing key pair was retained and cryptographically validated, not rotated.
+
+Vercel production has all three VAPID variables as sensitive values. Ignored api/.env and api/.env.vercel were synchronized; the verified production configuration constructs a push sender. API source remains `cbddc597d185310171f987d35a31abebcf87dba7`. Redeployment `dpl_85RjGnNcDsu54tQxZzTCWuvpw2LV` reached READY at `https://housemate-5qslo01h4-dreamy-day.vercel.app`; canonical `https://housemate-api.vercel.app` was verified to resolve to it. Web stays at `4a55f76f50b23f2734d4c756e656305f1098537c`; no runtime web/API code, migration or scheduler configuration change was needed. Health/readiness, protected-route rejection and CORS checks passed. Scheduler job 8546464 remains healthy and enabled every minute; recent actual scheduled HTTP 200 runs continue after activation. Runtime error counts are checked separately; do not infer actual device delivery from a healthy scheduler or READY deployment.
+
+Next: each member explicitly enables their own browser under Notifications → Settings → Refresh settings and devices → Enable push in this browser. iPhone requires a Home Screen web app on iOS 16.4+, opened from its icon. Category preferences/quiet hours remain personal; Shopping push defaults off. New opt-in does not replay old notifications. With the receiving app closed (without signing out) and quiet hours off, have another account publish a new announcement addressed to the receiving member, wait about two scheduler cycles and verify the generic notification and exact announcement deep link. The user was asked to report actual delivery/error; this check remains pending until evidence arrives. No household test messages were created or sent by Codex. Key/contact setup is complete; real Android/iPhone delivery, denial and deep-link acceptance must not be claimed complete prematurely.
+
+
 ### Search and additional Assistant drafts deployed — 2026-10-02 (latest request)
 
 The user authorized deployment of both pending features. Production action-create migration was applied before publication using the ignored private production configuration. A read-only schema check verified four columns, two validated constraints, two unique partial indexes and retained RLS on both private tables. No household records, credentials or provider settings were changed for deployment acceptance.
@@ -141,7 +218,7 @@ API main `cbddc597d185310171f987d35a31abebcf87dba7` deployed first, then app mai
 
 GitHub API CI run [36909165068](https://github.com/heinzaw-bit/housemate-api/actions/runs/36909165068) and web CI run [36909395543](https://github.com/heinzaw-bit/housemate-app/actions/runs/36909395543) both completed successfully. API health and database readiness returned 200; unauthenticated search, assistant availability and action preparation returned 401; allowed web CORS and unlisted-origin rejection passed. Home (`/`), Assistant, House, Money, Profile, Notifications, sign-in, manifest, service worker and offline page returned 200. The Home route is `/`, not `/home`. Initial read-only log checks for each exact deployment returned zero error-level and 5xx entries in the preceding 15 minutes; this is a bounded snapshot, not ongoing monitoring.
 
-Next: use the signed-in production app to check search permissions and editable shopping/chore/expense/bill draft confirmations, same-key interrupted retries and eligible notifications, then run Android Chrome/iPhone Safari acceptance from `app/QUALITY_CHECKS.md`. These authenticated/device checks remain pending; HTTP checks and DOM tests do not establish them. Preserve generated local `app/next-env.d.ts` development imports and the content-unchanged Profile test line-ending status outside commits. Existing push remains disabled pending a real public support contact.
+Next: use the signed-in production app to check search permissions and editable shopping/chore/expense/bill draft confirmations, same-key interrupted retries and eligible notifications, then run Android Chrome/iPhone Safari acceptance from `app/QUALITY_CHECKS.md`. These authenticated/device checks remain pending; HTTP checks and DOM tests do not establish them. Preserve generated local `app/next-env.d.ts` development imports and the content-unchanged Profile test line-ending status outside commits. Production push was subsequently enabled as documented in the latest section above; device delivery acceptance remains separate.
 
 
 ### Assistant shopping, chores, expense and hybrid-bill drafts — 2026-10-02 (included in current release)
