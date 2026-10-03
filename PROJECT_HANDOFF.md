@@ -133,7 +133,96 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
-### Offsite backup activation — 2026-10-03 (latest completed work)
+### Minimal notification layout — 2026-10-03 (latest implementation)
+
+The user approved the cleaner Notifications recommendation. Local web changes
+replace large inbox cards with compact source-link rows, category icons, unread
+dots, Important/Urgent badges and Today/Yesterday/Earlier grouping in the
+household timezone. Inbox keeps All/Unread, bounded Mark all read, separate
+accessible individual-read buttons and older cursor pages. The header has one
+unread count and an icon refresh action; empty states reuse the existing mascot.
+
+Settings now has Device notifications, Choose updates and Quiet hours. Device
+management and the nine Inbox/Push category switches use native collapsible
+details. Quiet-hour times appear only when enabled. The current device offers
+Enable notifications or Turn off based on account-scoped local identity, the
+server's enabled state and browser permission. Unknown/blocked setup remains
+explicit. Household preferences still require Save changes; device refresh
+preserves pending edits, leaving Settings asks before discarding them, and the
+Inbox switch is disabled while saving/changing push devices. Theme variables,
+phone layout rules, keyboard focus and reduced-motion styles are included.
+
+Changed web files: `components/notification-workspace.tsx`, new
+`components/notification-inbox.tsx`, `app/globals.css`, README and tests. The API,
+OpenAPI contract, push sender/scheduler and service worker were not changed.
+Five new tests cover timezone grouping/read/filter/pagination actions, explicit
+saves/refresh preservation, leaving dirty settings/device disable, permission
+and setup failures, and structural axe checks. All 157 web tests passed; lint
+and typecheck passed, and the production build succeeded. Actual phone
+visual acceptance remains pending. The user subsequently requested deployment.
+Web main `3992528c4c9965bc9b13fec4c0cb31e62736fbd2` was committed/pushed after
+staged credential checks passed. Clean GitHub CI `37095562648` succeeded; Vercel
+production `housemate-ey91m3sre-dreamy-day.vercel.app` reached READY for that exact
+commit. Canonical web Notifications, main routes, manifest, worker and offline
+page returned HTTP 200. The production site is `https://housemate-app-xi.vercel.app`.
+Preserve the pre-existing `next-env.d.ts` and `tests/member-settings.test.tsx`
+changes, plus the previous uncommitted monitoring documentation.
+
+### Monitoring receipt and iPhone timing — 2026-10-03 (latest report)
+
+The user enabled GitHub Actions failure emails and confirmed checking the
+cron-job.org failure/recovery test messages. Their attachment shows the isolated
+test's HTTP 404 failure email for 08:10:36 Bangkok; recovery receipt is
+user-reported. GitHub failure-email receipt itself has not been exercised.
+The separate backup-key copy is still pending; the original file is
+`api/.run/keys/backup.key` (32 bytes, existence/size checked without printing it).
+Guide copying the exact file into a password manager encrypted attachment or
+encrypted removable storage; do not regenerate, print or expose it. The user's
+choice of protected destination is pending.
+
+Android push continues to work. The user tested a friend's iPhone installed
+through Safari and reports both the system notification and in-app entry arrived
+after about 30 seconds. They initially associated arrival with reopening the app;
+the closed-app test and notification-tap result remain unconfirmed. Focus,
+Scheduled Summary and quiet-hours settings are not recorded. Read-only aggregate
+production checks found two Apple deliveries accepted in about 45–48 seconds,
+with no Apple delivery errors or outstanding queue entries. The scheduler is
+enabled, configured correctly and healthy every minute (12:14:01 Bangkok,
+533 ms). A 30-second delay is consistent with that schedule, rather than proof
+of a platform bug. Provider acceptance does not establish display timing.
+No push code/config changes were made. Ask for a closed-app 90-second test with
+Focus/Scheduled Summary/quiet hours off; do not mark iPhone background/tap
+acceptance complete until confirmed.
+
+### Sentry owner alerts — 2026-10-03 (latest completed work)
+
+The user saved `SENTRY_AUTH_TOKEN` in ignored `api/.env.monitoring` and explicitly
+approved production alerts/test emails to the single active Sentry owner. The
+US organization is `dreamyday`; existing project alerts were updated in place:
+API workflow `6093012` / issue-stream detector `10494760`, web workflow `6093036`
+/ detector `10494807`. Both are enabled, production-only, trigger on new issues
+or regressions, filter error/fatal levels and email that owner directly. The
+repeat notification interval is 30 minutes per issue. Readback verified the
+configuration. Unrelated PR and unattached default rules were preserved.
+
+Two synthetic non-private errors went through the actual API/web sanitizers;
+both were accepted with HTTP 200 at 09:55:31–32 Bangkok. Sentry's `lastTriggered`
+advanced for web at 09:55:54 and API at 09:55:56. The user confirmed both API
+and web test emails arrived in their Sentry owner inbox. Test event IDs are API
+`5e0da6ba584c453cba598a31458126a9`, web `10ba267ebda44fb290c1ceb3d5dec4f2`.
+This verifies ingestion, alert triggering and owner email receipt. Actual browser
+crashes and the resolve/recur regression path remain untested. The operator token remains
+local, is not a runtime variable and was never printed or committed. No app
+deployment, household writes or public crash endpoint were needed.
+
+**Next:** resolve the two synthetic test issues in Sentry after reviewing them;
+exercise regression alerts separately if desired. iPhone push acceptance,
+the first scheduled backup, GitHub failure email receipt and separate recovery-key
+preservation remain pending. Uptime email receipt and GitHub email settings were
+subsequently confirmed above. Do not redo
+the completed backup activation or resend these successful Sentry tests.
+
+### Offsite backup activation — 2026-10-03
 
 The user explicitly approved private backup setup/activation and confirmed only
 Android has been push-tested; iPhone remains pending. Private DreamyDay store
@@ -162,8 +251,8 @@ Saturday/manual restore checks are active. The first scheduled run, GitHub
 failure email receipt, separate key preservation and managed Supabase/Auth
 cutover remain unverified. No Storage object bytes exist/are backed up.
 
-Sentry token-versus-dashboard preference is still unanswered; account access
-and actual alert email receipt remain required. No Sentry token is available.
+Sentry token access, alert configuration and owner test email receipt were
+subsequently completed above.
 The manual operator checklist in `api/OPERATIONS.md` explains GitHub failure
 notifications, separate recovery-key storage, cron-job.org test emails around
 08:10–08:13 Bangkok, Sentry setup and iPhone acceptance. Do not re-ask for backup
@@ -176,7 +265,7 @@ taps now work. Android Chrome delivery and opening are user-verified. A question
 is pending about whether iPhone was also tested; do not infer that it passed.
 The user now requests completion of the unfinished backup/monitoring work and
 manual instructions. Backup-secret transfer/activation was subsequently approved
-and completed above. Sentry token versus dashboard preference remains pending.
+and completed above. Sentry owner alert configuration was also completed above.
 
 The user confirms phone push delivery works, but tapping does not go straight to
 the app; they identified Android Chrome. Exact post-tap behavior is still being

@@ -76,6 +76,7 @@ Current foundation: household onboarding, money, meals, shopping, one-off chores
 
 ### 11. Deliver notifications without requiring repeated visits
 
+- [x] Simplify Inbox into grouped compact rows and Settings into device notifications, expandable category choices and quiet hours, retaining explicit saves and read actions (deployed 2026-10-03; phone visual acceptance pending).
 - [x] Add an in-app notification/activity feed with read state and links to related records. Includes unread bell, All/Unread, cursor pages, individual/bounded bulk read, transactional activity, and deduplicated scheduled reminders.
 - [x] Add category preferences and quiet-hours controls through the authorized API. Preferences are personal per household; quiet hours delay all push priorities in the household timezone.
 - [x] Add web push opt-in, denial guidance, existing-subscription refresh, device removal, and safe deep links with generic lock-screen text. Durable delivery, retry, quiet deferral, and expired-device handling passed simulated-transport database checks.
@@ -119,14 +120,19 @@ Use `app/QUALITY_CHECKS.md` for steps and evidence. These manual checks have not
 
 - [x] Activate the production web push sender with the approved existing key pair.
 - [x] Verify Android Chrome phone push delivery and notification-tap app opening (user confirmed after the 2026-10-03 fix).
-- [ ] Verify iPhone Home Screen closed-app delivery and exact notification links (iPhone-specific result not yet recorded).
+- [ ] Verify iPhone Home Screen closed-app delivery and exact notification links (Safari installation and delivery reported with about 30-second delay; closed-app/tap acceptance pending).
 - [x] Repair web uptime monitoring using a small production runtime health endpoint; scheduled recovery verified.
 - [x] Run an isolated owner-alert failure/recovery test and remove its temporary job.
-- [ ] Confirm actual owner alert emails and configure/verify Sentry issue alerts (user deferred Sentry access).
+- [x] Configure production-only API/web Sentry owner alerts and verify synthetic new-error alert triggering (2026-10-03).
+- [x] Confirm actual owner email receipt for both Sentry project test alerts (user confirmed 2026-10-03).
+- [x] Confirm uptime failure/recovery test emails (user reported both; failure screenshot provided 2026-10-03).
+- [ ] Separately exercise Sentry regression alerts.
 - [x] Create a fresh encrypted backup and verify the complete 66-table local restore, financial API checks and recovery SQL.
 - [x] Implement private offsite backup storage/scripts and the guarded daily/weekly GitHub workflow.
 - [x] Approve/provision private GitHub backup secrets, enable the schedule and verify an initial downloaded offsite restore (cloud run 37089625945, 66 tables, 2026-10-03).
-- [ ] Confirm the first daily scheduled backup and enable/verify owner GitHub Actions failure emails; preserve a separate protected recovery-key copy.
+- [x] Enable owner GitHub Actions failure emails (user confirmed 2026-10-03).
+- [ ] Confirm the first daily scheduled backup and actual GitHub Actions failure-email receipt.
+- [ ] Preserve a separate protected recovery-key copy.
 
 ## Completion rule for every item
 
