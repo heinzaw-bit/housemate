@@ -133,6 +133,33 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Notification tap navigation — 2026-10-03 (latest report)
+
+The user confirms phone push delivery works, but tapping does not go straight to
+the app; they identified Android Chrome. Exact post-tap behavior is still being
+clarified and iPhone-specific acceptance is not recorded. The previous worker
+selected the first same-origin window, awaited navigation before focus, and had
+no fallback on rejection. The revised worker immediately calls `openWindow` to
+let the browser select an installed app, focuses the returned client, corrects a
+returned start-page URL, and falls back to live same-origin clients if opening
+fails/returns null. It continues past inert/closed clients. Normal session and
+API authorization remain unchanged; unsupported links still open the inbox.
+Worker regression tests cover immediate opening, returned-window focus, root URL
+correction, failed focus/opening, null results, inert/closed/foreign clients and
+unsafe links. Actual Android/iPhone tap acceptance requires a production phone
+retest after accepting the installed app's Reload update prompt with no drafts.
+
+Web main local commit `b9c030abeae4bf7ef548e32a5df684f36dd792b9` passed
+lint, typecheck, all 152 tests and production build. Publication scan and staged
+diff checks passed. Automatic approval review rejected the push to main because
+the latest bug report did not explicitly authorize publication/deployment. An
+async approval question is pending. Do not work around that rejection or claim
+the fix is live; push the existing tested commit only after approval arrives.
+
+The earlier backup activation secret-transfer question remains unanswered. This
+push report does not authorize GitHub backup secrets or cloud activation. Sentry
+alert access and actual owner email receipt remain deferred by the user.
+
 ### Backup automation and monitoring — 2026-10-03 (latest request)
 
 The user requested push delivery acceptance, then automated offsite backups and

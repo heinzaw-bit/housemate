@@ -118,7 +118,7 @@ Use `app/QUALITY_CHECKS.md` for steps and evidence. These manual checks have not
 ## Household rollout operations — 2026-10-03
 
 - [x] Activate the production web push sender with the approved existing key pair.
-- [ ] Verify actual Android/iPhone closed-app delivery and exact notification links (user deferred).
+- [ ] Verify actual Android/iPhone closed-app delivery and exact notification links (phone receipt reported working 2026-10-03; Android Chrome tap navigation reported failing, fix awaiting phone retest; iPhone-specific result not recorded).
 - [x] Repair web uptime monitoring using a small production runtime health endpoint; scheduled recovery verified.
 - [x] Run an isolated owner-alert failure/recovery test and remove its temporary job.
 - [ ] Confirm actual owner alert emails and configure/verify Sentry issue alerts (user deferred Sentry access).

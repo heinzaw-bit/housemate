@@ -101,7 +101,7 @@ This document describes intended features and user-visible behavior. It can chan
 - Optional quiet hours use the household timezone, support overnight windows, and delay every push priority until the window ends. They do not hide the inbox. Defaults suggest 23:00–07:00 with quiet hours initially disabled. A delayed reminder is skipped if it has expired, been answered, or been read.
 - Web push is explicit opt-in after an explanation of its value and privacy. Do not open a permission request automatically. Show instructions for browser denial or unsupported platforms. Devices belong to the account across households, with up to ten active devices; members can disable them, and signing out removes the current browser subscription. Refresh an existing subscription on a signed-in visit; missing subscriptions require explicit Enable again, and remote-disabled devices are never silently re-enabled. Expired provider subscriptions are disabled; transient errors have bounded retries.
 - Lock-screen title and body are generic: no financial amounts, household names, or private message text. Push links stay on the app origin and require authentication and authorized household access. Newly enabled devices receive only subsequent updates. Provider acceptance can be ambiguous during retries; notification tags coalesce duplicate deliveries, but device delivery is not guaranteed.
-- Live web push requires a real server contact email or HTTPS support URL, server-only VAPID private key, and a supported secure browser context. Until configured, the inbox, reminder generation, and preferences work and the web screen explains why push is unavailable. Production requires HTTPS; some mobile browsers require an installed PWA. Production VAPID/contact configuration was activated on 2026-10-02; each member must still explicitly enable each device, and real-device delivery acceptance remains separate from server activation. Native mobile push, email, SMS, and LINE delivery are not implemented in this slice.
+- Live web push requires a real server contact email or HTTPS support URL, server-only VAPID private key, and a supported secure browser context. Until configured, the inbox, reminder generation, and preferences work and the web screen explains why push is unavailable. Production requires HTTPS; some mobile browsers require an installed PWA. Production VAPID/contact configuration was activated on 2026-10-02; each member must still explicitly enable each device, and real-device delivery acceptance remains separate from server activation. Notification taps ask the browser to open the same-origin source link in its app context, focus the returned window, and recover through a live app window if opening fails. Unsupported links open Notifications. Browsers determine whether an installed app or browser window is used; normal session and API authorization remain required. Native mobile push, email, SMS, and LINE delivery are not implemented in this slice.
 
 ### Web and mobile experience
 
@@ -211,7 +211,9 @@ The web exposes a small public, no-store `/api/health` runtime check; API databa
 readiness remains a separate endpoint. Uptime monitors use these checks rather
 than downloading the landing page. An isolated owner-alert failure/recovery
 drill never interrupts household services. Actual email receipt, Sentry alerts
-and background push on both target phones remain manual acceptance items.
+and notification-tap links on both target phones remain manual acceptance items.
+The user confirmed phone push receipt on 2026-10-03 and reported Android Chrome
+tap navigation failing; iPhone-specific delivery acceptance is not yet recorded.
 
 Offsite backup automation is implemented with private encrypted Vercel Blob
 storage and a guarded daily GitHub Actions workflow, bounded retention and
