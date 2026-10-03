@@ -133,6 +133,35 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Inline Money controls merged and deployed — 2026-10-03 (latest request)
+
+The user authorized merging the current branch into main and deploying it.
+App `codex/money-focused-records` was fast-forwarded into main at
+`20aeed3aeb40e16add08f9fc605f3d2b67cab1a4` and pushed to
+`heinzaw-bit/housemate-app`. The matching whole-project branch was merged into
+main at `1012536` and pushed to `heinzaw-bit/housemate`, preserving the app
+submodule pointer and shared SPEC. No API code or configuration changed.
+
+Web CI [37127947004](https://github.com/heinzaw-bit/housemate-app/actions/runs/37127947004)
+passed clean install, lint, typecheck, all 164 tests in 28 files and production
+build. Vercel production deployment `dpl_3Kg3rePeFT6TJBEEBdV3YmCkLsAz` reached
+READY at `https://housemate-976df7hc7-dreamy-day.vercel.app`, with the canonical
+`https://housemate-app-xi.vercel.app` alias attached. Home, Assistant, House,
+Money, Profile, Notifications, sign-in, manifest, service worker and offline
+page each returned HTTP 200. The Vercel connector reported missing DreamyDay
+scope authorization; the existing signed-in CLI verified the deployment.
+The exact deployment's preceding 15-minute log checks returned zero error-level
+and 5xx entries; this is a bounded snapshot, not ongoing monitoring.
+
+The corrected inline text controls and cleaner household selector are now
+published; the superseded separate-panel design below is not the final UI.
+Both working repos are on main; the feature branches are retained. Preserve
+unrelated generated web files, API documentation and attachments. Actual
+Android/iPhone visual acceptance remains pending; CI and HTTP checks do not
+establish rendered device acceptance. Continue the remaining product and
+operational checklist only when requested; draft recovery is a recommendation,
+not implemented by this release.
+
 ### Money views corrected to inline text toggles — 2026-10-03
 
 The user rejected separate View all views and asked for expansion inside the
