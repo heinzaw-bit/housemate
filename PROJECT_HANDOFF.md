@@ -133,6 +133,65 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Money cards and profile avatar release — 2026-10-03
+
+The user authorized committing and deploying the four local UI changes below:
+theme-aware green profile avatar, removal of the Money currency badge, and
+independent bill/expense history/detail dropdowns. App main is
+`9d9d5cd8c79e3df0b7f359e9768c7521772fd975`. Local web lint, typecheck, all
+**157 tests in 27 files**, and production build passed. Generated local files,
+unrelated API documentation and attachments are excluded. No API release is
+required. The earlier local status in the implementation notes below describes
+the state before this deployment request; follow this release entry for the
+current publication state. Phone visual acceptance remains pending.
+
+Vercel production `dpl_9F37h7K7RgxSNKnAkzmd19FpBxbX` is READY and aliased to
+`https://housemate-app-xi.vercel.app`. GitHub CI **37121479086** passed, including
+clean installation, lint, typecheck, tests and production build. All ten
+canonical web route/PWA HTTP checks returned 200. The user should finish open
+drafts and accept the app update/reload to see the changes on their phone.
+
+### Collapsible expense cards — local 2026-10-03
+
+The user requested the same dropdown implementation for Expense history and
+Expense details. Both now match the bill card heading buttons: independent
+expand/collapse, initially expanded, chevron and accessible state/control links,
+44px-minimum targets, and top-aligned desktop cards. Selecting an expense or
+following a direct record link opens its details automatically. Hidden bodies
+remain mounted to preserve loaded state and confirmation input; mobile Back
+remains visible. SPEC and app README are updated. Web lint, typecheck and 16
+existing financial-history/form quality tests passed. This is local, uncommitted
+and not deployed; the bill toggles, avatar color and badge removal below are
+also still local. Phone visual acceptance remains pending.
+
+### Collapsible bill cards — local 2026-10-03
+
+The user requested dropdown buttons in Bill history and Bill detail. Each card
+now has an independent 44px-minimum keyboard-accessible heading button with a
+chevron, `aria-expanded` and `aria-controls`. Both start expanded. Opening a
+bill, including a direct record link, expands its detail. Collapsing hides the
+body without unmounting it, preserving pagination, record and confirmation
+state; desktop cards align at the top and the mobile Back control stays visible.
+SPEC and app README are updated. Web lint, typecheck and 15 existing bill/form
+quality tests passed. Actual-device visual acceptance remains pending. This is
+local, uncommitted and not deployed, alongside the two UI changes below.
+
+### Money header currency badge removed — local 2026-10-03
+
+The user asked to remove the THB HOUSEHOLD badge. It is removed from the live
+Money header and the design-preview Money header, including unused Badge imports.
+Amounts still show currency. SPEC is updated; web lint and typecheck passed.
+This is local and not deployed,
+alongside the profile avatar color change below.
+
+### Profile avatar theme color — local 2026-10-03
+
+The user asked to replace the peach profile initial avatar with HouseMate's
+theme colors. `app/components/member-settings.module.css` now uses the shared
+`--accent` and `--accent-foreground` tokens: soft green/dark green in light mode,
+and deep green/mint in dark mode. SPEC is updated. The affected CSS passes Biome.
+This small presentation change is local, uncommitted and not deployed.
+
 ### Header/search and Android header fix — published 2026-10-03
 
 The user authorized deployment. App main is now
