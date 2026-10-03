@@ -151,10 +151,18 @@ retest after accepting the installed app's Reload update prompt with no drafts.
 
 Web main local commit `b9c030abeae4bf7ef548e32a5df684f36dd792b9` passed
 lint, typecheck, all 152 tests and production build. Publication scan and staged
-diff checks passed. Automatic approval review rejected the push to main because
-the latest bug report did not explicitly authorize publication/deployment. An
-async approval question is pending. Do not work around that rejection or claim
-the fix is live; push the existing tested commit only after approval arrives.
+diff checks passed. Automatic approval review initially rejected publication;
+the user then explicitly requested deployment on 2026-10-03. The tested commit
+was pushed to app main and Vercel production
+`housemate-q7zd168a0-dreamy-day.vercel.app` reached READY. Canonical
+`https://housemate-app-xi.vercel.app/sw.js` returns HTTP 200 and matches the
+tested worker byte-for-byte after line-ending normalization. Web health,
+House and standalone manifest checks passed on the canonical origin. GitHub
+clean-build run `37088547498` succeeded (clean install, lint, typecheck, all 152
+tests and build). Sanitized Vercel error/5xx checks returned zero entries in the
+15-minute window. Actual Android/iPhone notification-tap retesting is pending;
+instruct the user to open the installed app, finish drafts, accept Reload if
+offered, then tap a fresh notification with the receiving app closed.
 
 The earlier backup activation secret-transfer question remains unanswered. This
 push report does not authorize GitHub backup secrets or cloud activation. Sentry
