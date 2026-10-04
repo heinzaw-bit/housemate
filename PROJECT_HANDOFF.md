@@ -133,6 +133,38 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Mobile UI refinements — production 2026-10-04
+
+The user requested deployment. Web main **833f07d1e8da4ff09e7cc89e280e51c5bde20034** is committed and pushed to heinzaw-bit/housemate-app. It includes the local fixes below: matching 44px mobile header mascot, a single scrolling Board filter row, removal of View balance/Calculate a split answer-footer actions, active-tab + New beside the Board title, in-form cancellation/focus, and Refresh beside list update status. No API, migration or environment change was required. API remains **51b716dd82b2aca8811cc78b0f2bc5c4463ea231**.
+
+DreamyDay production deployment **dpl_J1ywBBipoNMVTRPqfTEpnCugjAZa** (housemate-njfbgx0l0-dreamy-day.vercel.app) reached READY for this exact web commit with https://housemate-app-xi.vercel.app assigned. Build duration was approximately 35 seconds. Existing authenticated Vercel CLI and Git integration were used. Both pre-publication local main branches matched origin/main; staged web credential scans and diff checks passed.
+
+Verification: web lint, production build including TypeScript, 27 Board/communications/draft/accessibility tests and 21 Assistant tests passed. All ten deployed route/health/manifest/service-worker probes passed. GitHub CI **37193082186** passed on the exact deployed commit, including clean installation, lint, typecheck, full tests and build. Sanitized deployment log checks found zero error-level or 5xx entries in the checked 15-minute window. No production household record was written. Actual Android/iPhone visual acceptance for these layout fixes remains pending. Earlier local publication-status statements below are superseded by this entry. Whole-project main pins the published app revision and current shared documents.
+
+
+### Board create actions repositioned — local 2026-10-04
+
+The user approved moving creation beside the Board title. HouseWorkspace now owns one active-tab action: + New on phones (up to 650px), New announcement/New event on desktop, with full accessible labels. Compact announcement/event workspaces no longer render the old toolbar below section tabs. Refresh is beside Updated status via RecordRefreshStatus; events now track last successful list refresh. Noncompact legacy communication toolbars remain available. Opening/reopening a form focuses and scrolls to it with reduced-motion support, retaining existing input. Compact forms include Cancel with existing saved-draft clearing behavior. Announcement review/publication and event submission, API authorization and endpoints are unchanged. SPEC, web README and quality checklist updated.
+
+Verification: lint, all 27 tests across Board/communications/saved-draft forms/form accessibility, and production build including TypeScript passed. Two new Board regressions verify active-tab creation, repeated New preserving and focusing input, Cancel without writes, and refresh reads without creation. React review checked stable state, effect dependencies, lazy loading, accessible actions and no extra writes. Actual Android/iPhone visual acceptance remains pending. Local/uncommitted on main in D:/house_mate; preserve the previous mascot sizing, filter wrapping and Assistant footer fixes below. No commit/push/deployment requested for this change.
+
+
+### Assistant money footer links removed — local 2026-10-04
+
+The user requested removing the View balance link and Calculate a split action shown after Assistant output. AnswerCard now filters balance-view links from the footer sources and no longer renders Calculate a split for balance/bill answers. This applies to latest and earlier answers. Other source links, individual record links, API-calculated amounts and checked timestamps remain. Removed the unused moneyCreateHref import, householdId presentation prop and nextAction CSS. No API/contract change. SPEC, AI plan, web README and quality checklist updated to remove stale descriptions of the split action.
+
+Verification: web lint, all 21 existing Assistant tests and production build including typecheck passed. Existing balance-answer assertions now check both requested links are absent. Work remains local/uncommitted on main in D:/house_mate alongside the mobile mascot sizing and Android Board filter fixes below. No deployment requested for this change.
+
+### Android Board filter wrapping — local 2026-10-04
+
+The user reported Expired wrapping below the announcement filters on Android. Compact CommunicationBrowser now displays To acknowledge for needs_ack, with an accessible label beginning with that visible wording and retaining the full acknowledgement meaning. A dedicated board-record-filters flex row never wraps; min-width: 0 and max-width: 100% contain overflow, and horizontal scrolling keeps filters available at narrow widths/enlarged text without widening the page. Four-pixel inset/scroll padding leaves room for focus indication. Compact announcement controls have 20px top padding below the Board section tabs. Noncompact legacy communication filters retain their wrapping layout. Filter values, data reads, publication/acknowledgement flows and permissions are unchanged. SPEC/web README updated. Preserve the earlier uncommitted 44px mobile mascot fix.
+
+Verification: lint passed and all seven existing Board/communications tests passed. A final production build started after the accessible-name adjustment passed, including typecheck. These are structural/automated checks; actual Android visual acceptance remains pending. Work is local and uncommitted on main in D:/house_mate; no push/deployment requested for this correction.
+
+### Mobile header mascot sizing — local 2026-10-04
+
+The user reported the Android topbar mascot was smaller than the adjacent icons. The existing mobile-brand brand-icon rule at widths up to 850px used a 32px tile while header controls use 44px. Increased that tile to 44px square and set flex-shrink: 0; the existing 84% SVG scales with it. Change is scoped to the mobile header, with no desktop/sidebar/auth/Assistant mascot or API change. SPEC and web README describe the matching size. Web lint and production build (including typecheck) passed; no new tests were added for this reversible styling change. Actual Android visual acceptance remains pending. This is uncommitted on main in D:/house_mate after the previous approved release; no push or deployment was requested for this correction.
+
 ### Latest Board, Assistant and reload release — production 2026-10-04
 
 The user explicitly requested deploying the latest changes. API main **51b716dd82b2aca8811cc78b0f2bc5c4463ea231** and web main **cab40c38b8806b4155263745260cee2abfbf5fed** fast-forward the codex/house-announcements-events work into main and are pushed to their private heinzaw-bit repositories. This includes the previously published feature-branch Board announcement/event layout and name, question-focused Assistant, and all subsequent Assistant/general-reply/context/notice/draft-removal and reload-entry changes below. Weather is removed, including a stale provider-schema enum found and corrected during release review. Child .gitattributes enforce LF and normalization-only files were excluded from staged semantic changes. Staged credential scans passed. No migration or environment/secret transfer was needed.
