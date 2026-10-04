@@ -133,6 +133,37 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### GitHub publication and D: checkout — 2026-10-04
+
+The user requested publishing the current project to GitHub and cloning it onto D:. Target checkout is `D:/house_mate`; retain the C: original until the new checkout is verified. Publish existing Board/question-only Assistant changes and API operational documentation on `codex/house-announcements-events` in the three heinzaw-bit repositories, with child commits before parent pointers. This request does not merge the review branch into main. Private environment files, TLS certificate, recovery key, local provider metadata and attachments transfer locally, outside Git. Reinstall project dependencies on D:; do not copy node_modules or build output. Verification/publication status will be recorded after migration. Reminder-monitor commands should use the new API directory after migration is verified.
+
+### Question-only Assistant with loading inside input — local 2026-10-04
+
+Latest user steering removes draft commands from Assistant and places the loading animation inside its chat/search input, with only answers below. AssistantWorkspace now calls only the question endpoint, ignores legacy action availability, and no longer imports preparation/editor/recovery APIs. Ask/Enter remains one step with a visible Gemini sharing notice and no consent checkbox. The mascot/dots/skeleton overlay replaces the visible textarea while busy but preserves its mounted value; Cancel/error/clarification retain text and restore focus. Reduced motion remains supported. Device recovery restores only unsent questions after explicit Resume; obsolete action seeds cannot reopen editors. Backend contracts/editor components and normal Board/Money creation remain intact for compatibility.
+
+This is local on codex/house-announcements-events, alongside the Board changes below. No commit, push or deployment was requested for this update. Preserve unrelated local changes and generated next-env.d.ts. Web lint, typecheck, all **193 tests in 32 files**, and production build passed. Tests cover loading inside the input, answers outside, cancellation/late reads, no draft preparation or writes, explicit question recovery and rejection of obsolete action seeds. Retained communication editors still have direct confirmation/retry tests, alongside existing financial editor coverage. Generated next-env.d.ts was restored to its pre-build content. Actual signed-in Android/iPhone rendering remains pending.
+
+
+### Assistant loading and one-step questions — local 2026-10-04
+
+Verification: lint (123 files), typecheck, all **194 tests in 31 files** and production build passed. The Assistant/draft subset passed 37 tests, including visible-notice submission, loading/cancellation, Shift+Enter/Enter, unchanged decimals/context, retained clarification input and household/account isolation. The first full run exposed a one-second lazy-import wait in the Board test; its initial wait was adjusted to five seconds and the full rerun passed. Generated next-env.d.ts was restored to its prior local state. Actual phone animation/keyboard acceptance is still pending.
+
+On the existing **codex/house-announcements-events** root/app branch, the user requested loading animation, removal of the consent control and easier asking/readable answers. The separate checkbox is removed. A visible Gemini sharing notice below the composer explains free-tier use/review and omitting private input; explicit Ask/Enter acknowledges it using the unchanged API field. Typing/restoring never sends. Ask/Enter submits, Shift + Enter adds a newline, and Ctrl/Command + Enter remains supported. The loading card shows a gently moving mascot, dots and placeholder lines, with an accessible status/Cancel and static reduced-motion behavior. Answers add topic headings and separate the exact first API sentence from context, preserving money decimals/newlines and escaped text. Failures/cancellation/clarification keep input; completed requests restore focus. Existing action editing/review/confirmation, idempotency, private-input guards, provider budgets and scoped late-response rejection remain unchanged. No API/provider/secret change, commit, push or deployment is included in this local request.
+
+
+### House simplification on a separate branch — 2026-10-04
+
+The user subsequently chose **Board** as the tab name. Navigation (desktop/mobile), the page heading, accessible section label, browser title and landing tour now use Board. The `/house` URL and internal section identifiers remain compatible with existing links. This rename remains local on the same feature branch.
+
+Board now matches Money's shared page-header styling, with eyebrow “SHARED UPDATES, PLANS TOGETHER” and description “Share announcements, plan events, and see who’s joining.”
+
+The user requested the preceding recommendation on a new branch. Root and app are on **codex/house-announcements-events**, created from the deployed main release; main and production have not been changed by this work. House now defaults to Announcements with only Announcements/Events navigation, no Your next actions panel or shared Add menu, one create action per tab, compact announcement previews and mobile event Back navigation. Home drops next chore/meal and household-work cards. Assistant default copy/shortcuts no longer promote those tools. Search groups old filters under Earlier household tools; notification settings reveals their switches on request while preserving all stored preferences. Existing direct links, records, API functionality and saved drafts remain compatible. Loaded announcement pages prioritise active urgent/important notices locally; no API sorting contract change or migration was made.
+
+Changes are local for review; no commit, push or deployment was requested for this branch. Preserve unrelated generated web files, line-ending-only changes, API operational notes and attachments.
+
+Verification: web lint (123 files), typecheck, all **193 tests in 31 files** and production build passed. After the final event deep-link preservation adjustment, the affected House/accessibility suite was rerun (**19 tests passed**) and lint/build passed again. The new House integration tests cover default navigation, loaded notice ordering, mobile detail/back, attendance, announcement/older chore links and past events outside the first page. Main remains at deployed app e1ce531; no API changes or shared migrations. Actual signed-in phone layout acceptance is pending.
+
+
 ### Saved drafts deployed; bill templates canceled — 2026-10-04
 
 The user canceled bill templates and authorized committing saved drafts on the current branch, syncing origin/main, merging into main, pushing and deploying. Only the uncommitted template source, web controls, tests, contract and unapplied migration were removed; no shared database migration was applied. Existing local operational notes, generated web files and attachments were preserved. API source and production API are unchanged.

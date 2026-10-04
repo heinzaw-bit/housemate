@@ -28,6 +28,19 @@ git clone --recurse-submodules https://github.com/heinzaw-bit/housemate.git
 
 For an existing clone, run `git submodule update --init --recursive`. The repositories are private; authenticate as an account with access. Either child repository can also be cloned on its own, with no sibling runtime dependency.
 
+### Current development checkout on D:
+
+The current Board and question-only Assistant work is published on `codex/house-announcements-events` in the project, web and API repositories. Clone that branch to include the latest development work:
+
+```powershell
+git clone --branch codex/house-announcements-events --recurse-submodules https://github.com/heinzaw-bit/housemate.git D:\house_mate
+cd D:\house_mate
+git -C app switch codex/house-announcements-events
+git -C api switch codex/house-announcements-events
+```
+
+GitHub contains source and shared documents. Private `.env` files, local TLS certificates, backup recovery keys, provider metadata and local attachments are excluded. Transfer needed configuration directly between your local checkouts and keep recovery keys protected; never commit them. Install dependencies independently with `npm ci` in `api` and `app`. Existing configured Supabase migrations do not need to be reapplied when moving this checkout. Keep the original directory until the fresh clone and local configuration are verified.
+
 When changing API or web code, commit and push from that child repository first. Then commit the updated `api` or `app` submodule pointer and any shared documents in the whole-project repository and push it. `git submodule update --init --recursive` checks out the recorded versions, which may use a detached HEAD; switch the affected child to `main` before making new changes. Shared product documents remain here, and each child includes its own engineering instructions.
 
 ## Run locally
