@@ -138,7 +138,8 @@ Use `app/QUALITY_CHECKS.md` for steps and evidence. These manual checks have not
 
 - [x] Automatically save new expense, bill, meal, shopping, chore, event, announcement and poll drafts, plus Assistant input/action editors; offer explicit Resume/Discard with seven-day expiry and per-account/household isolation.
 - [x] Preserve interrupted create payload signatures and retry keys, require fresh API money previews, clear cancelled/completed drafts and handle corrupt/blocked storage and competing tabs without automatic writes.
-- [ ] Deploy this draft-recovery release and verify refresh/full restart, reconnection, interrupted confirmation and app-update behavior on Android Chrome and iPhone Safari. Existing-record edits, purchases, transfers/removals, settings and votes remain outside this recovery slice.
+- [x] Deploy draft recovery from app main e1ce531; Vercel production reached READY and all ten web route/PWA checks returned 200.
+- [ ] Verify refresh/full restart, reconnection, interrupted confirmation and app-update behavior on Android Chrome and iPhone Safari. Existing-record edits, purchases, transfers/removals, settings and votes remain outside this recovery slice.
 
 ## Completion rule for every item
 

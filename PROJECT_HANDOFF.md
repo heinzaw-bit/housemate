@@ -133,9 +133,20 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Saved drafts deployed; bill templates canceled — 2026-10-04
+
+The user canceled bill templates and authorized committing saved drafts on the current branch, syncing origin/main, merging into main, pushing and deploying. Only the uncommitted template source, web controls, tests, contract and unapplied migration were removed; no shared database migration was applied. Existing local operational notes, generated web files and attachments were preserved. API source and production API are unchanged.
+
+App **e1ce5315e3a18c9ff91f8d7dd61ce07bf5bbd622** was committed on codex/money-focused-records, merged with the fetched origin/main, fast-forwarded into main and pushed. The whole-project feature commit **5513abd** pins that release and was likewise merged/pushed to main. Root and app are now on main; the feature branches are retained. No unrelated API documentation or generated web files were committed.
+
+Local lint/typecheck, **188 tests in 30 files** and production build passed. Staged credential checks passed. GitHub clean-install CI [37174173286](https://github.com/heinzaw-bit/housemate-app/actions/runs/37174173286) completed successfully for that exact web SHA. DreamyDay housemate-app production is **READY** at https://housemate-dmtfxce1n-dreamy-day.vercel.app; the canonical https://housemate-app-xi.vercel.app origin and all ten main route/PWA checks returned HTTP 200. Vercel's status on the exact commit also reports deployment completed. The MCP connector still reports missing dreamy-day scope; the existing signed-in CLI verifies deployment.
+
+Drafts now recover on the same device after an explicit Resume choice. Seven-day account/household/context isolation, sign-out clearing, original interrupted-confirmation retry keys and fresh financial previews are implemented. Browser data clearing removes them; they do not sync across devices. Actual Android/iPhone refresh/full restart/offline-reconnection/interrupted confirmation/app-update acceptance remains pending. Do not implement or deploy bill templates unless the user requests them again.
+
+
 ### Automatically saved drafts — publication requested 2026-10-04
 
-The user requested device-local automatic draft recovery. The user authorized committing saved drafts on codex/money-focused-records, merging origin/main and deploying on 2026-10-04. Web commit e1ce5315e3a18c9ff91f8d7dd61ce07bf5bbd622 is committed on that branch, merged into main and pushed to heinzaw-bit/housemate-app. The user canceled the uncommitted bill-template feature; its source, contract, migration and tests were removed without applying a shared database migration. The Git-triggered web deployment is being verified; the preceding production release was app 20aeed3. No API source, migration, contract, provider configuration or secret changed.
+The user requested device-local automatic draft recovery. The user authorized committing saved drafts on codex/money-focused-records, merging origin/main and deploying on 2026-10-04. Web commit e1ce5315e3a18c9ff91f8d7dd61ce07bf5bbd622 is committed on that branch, merged into main and pushed to heinzaw-bit/housemate-app. The user canceled the uncommitted bill-template feature; its source, contract, migration and tests were removed without applying a shared database migration. The production release is READY at app e1ce531; the preceding production release was app 20aeed3. No API source, migration, contract, provider configuration or secret changed.
 
 `app/lib/saved-drafts.ts`, `assistant-draft-storage.ts` and `components/saved-draft.tsx` implement versioned, bounded, seven-day browser-storage slots scoped to account, household and currency/timezone context. Workspace supplies scope only after authorized identity/membership reads; AuthProvider clears saved drafts on sign-out/account changes, and membership pruning removes departed households. New expense, bill, meal, shopping, chore, event, announcement and poll creation forms save their explicit editable fields and offer Resume/Discard. Assistant stores unsent input and a compact action seed; resuming retrieves current members and then restores edited action fields after that explicit choice. Tokens, API preview totals, API member/record snapshots, answers and Gemini consent are not persisted.
 
@@ -143,7 +154,7 @@ Before a create request, the slot checkpoints original fields plus the exact pay
 
 Verification: web lint/typecheck, all **188 tests in 30 files**, and production build passed. Added recovery tests cover explicit resume/no automatic writes, cancel/success cleanup, interrupted-confirmation fields/key retention, malformed/expired/wrong-context data, account/household isolation, blocked storage, pagehide and competing tabs, plus real Expense/Bill/Assistant form integration. SPEC, README, QUALITY_CHECKS, checklist and Assistant documentation are reconciled. Actual Android/iPhone refresh/full restart/reconnection/update acceptance remains pending. Existing generated `next-env.d.ts`, the content-unchanged member-settings test, API documentation and attachments are preserved outside this implementation.
 
-Next: verify the authorized web deployment and CI, record release evidence, then perform the pending phone acceptance checklist. Do not redo the already deployed Money controls or unrelated operational work.
+Next: perform the pending phone acceptance checklist. Do not redo the already deployed Money controls or unrelated operational work.
 
 
 ### Inline Money controls merged and deployed — 2026-10-03 (latest request)
