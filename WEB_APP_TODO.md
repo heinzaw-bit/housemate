@@ -146,3 +146,10 @@ Use `app/QUALITY_CHECKS.md` for steps and evidence. These manual checks have not
 Use the relevant API contract, show loading/empty/error/success states, respect household and role boundaries, and test the user flow. For financial actions, verify the exact API result and retry behavior. Run the web app's lint, typecheck, tests, and build for each completed slice.
 
 Sources: `SPEC.md` (current product scope), `AGENTS.md` (project boundaries), `app/README.md` and `api/openapi.yaml` (implemented state), plus `PRD.md`, `UX_FLOWS.md`, `MONEY_ENGINE.md`, `NOTIFICATIONS_MESSAGING.md`, `AI_ASSISTANT.md`, `TESTING.md`, and `IMPLEMENTATION_PLAN.md` for supporting detail. Where older files assume a web-only backend or put AI in the MVP, follow the current SPEC and project boundaries.
+
+## Current Assistant and entry release — 2026-10-04
+
+- [x] Deploy the Board announcement/event layout, question-only Assistant, local greetings/help, authorized Board/Catch me up answers, general Gemini replies and topic-only household follow-ups.
+- [x] Remove weather lookup and Assistant save-draft/discard/sharing-notice/expanded-privacy UI; retain existing record-form draft recovery and backwards-compatible draft APIs.
+- [x] Deploy root session-loading entry without marketing flash during session restoration; signed-out Android/iPhone standalone launches open sign-in and ordinary signed-out browser visitors retain the landing after checks.
+- [ ] Confirm signed-in reload, Assistant responses, Board content and notification links on both phones against this release. Older Assistant action-publication acceptance items above describe retained APIs/editors, not actions offered by the current web Assistant.
