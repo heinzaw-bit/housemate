@@ -133,6 +133,19 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Automatically saved drafts — publication requested 2026-10-04
+
+The user requested device-local automatic draft recovery. The user authorized committing saved drafts on codex/money-focused-records, merging origin/main and deploying on 2026-10-04. Web commit e1ce5315e3a18c9ff91f8d7dd61ce07bf5bbd622 is committed on that branch, merged into main and pushed to heinzaw-bit/housemate-app. The user canceled the uncommitted bill-template feature; its source, contract, migration and tests were removed without applying a shared database migration. The Git-triggered web deployment is being verified; the preceding production release was app 20aeed3. No API source, migration, contract, provider configuration or secret changed.
+
+`app/lib/saved-drafts.ts`, `assistant-draft-storage.ts` and `components/saved-draft.tsx` implement versioned, bounded, seven-day browser-storage slots scoped to account, household and currency/timezone context. Workspace supplies scope only after authorized identity/membership reads; AuthProvider clears saved drafts on sign-out/account changes, and membership pruning removes departed households. New expense, bill, meal, shopping, chore, event, announcement and poll creation forms save their explicit editable fields and offer Resume/Discard. Assistant stores unsent input and a compact action seed; resuming retrieves current members and then restores edited action fields after that explicit choice. Tokens, API preview totals, API member/record snapshots, answers and Gemini consent are not persisted.
+
+Before a create request, the slot checkpoints original fields plus the exact payload signature and idempotency key. An unresolved attempt keeps its original fields despite later typing and rejects a changed confirmation; an identical manually reviewed retry uses the original key across refresh. Definitive first-request rejection permits editing. Resumed financial drafts need a fresh API preview. Nothing writes automatically. Successful/cancelled drafts clear without being recreated on cleanup; storage failures are visible, invalid/expired contexts are discarded, and changed cross-tab entries are not silently overwritten. Local storage is not encrypted by HouseMate or synchronized between devices. Existing-record edits, purchases, transfers/removals, settings and votes retain their existing in-memory guards.
+
+Verification: web lint/typecheck, all **188 tests in 30 files**, and production build passed. Added recovery tests cover explicit resume/no automatic writes, cancel/success cleanup, interrupted-confirmation fields/key retention, malformed/expired/wrong-context data, account/household isolation, blocked storage, pagehide and competing tabs, plus real Expense/Bill/Assistant form integration. SPEC, README, QUALITY_CHECKS, checklist and Assistant documentation are reconciled. Actual Android/iPhone refresh/full restart/reconnection/update acceptance remains pending. Existing generated `next-env.d.ts`, the content-unchanged member-settings test, API documentation and attachments are preserved outside this implementation.
+
+Next: verify the authorized web deployment and CI, record release evidence, then perform the pending phone acceptance checklist. Do not redo the already deployed Money controls or unrelated operational work.
+
+
 ### Inline Money controls merged and deployed — 2026-10-03 (latest request)
 
 The user authorized merging the current branch into main and deploying it.

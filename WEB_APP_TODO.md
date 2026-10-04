@@ -134,6 +134,12 @@ Use `app/QUALITY_CHECKS.md` for steps and evidence. These manual checks have not
 - [ ] Confirm the first daily scheduled backup and actual GitHub Actions failure-email receipt.
 - [ ] Preserve a separate protected recovery-key copy.
 
+## Device-local draft recovery — 2026-10-03
+
+- [x] Automatically save new expense, bill, meal, shopping, chore, event, announcement and poll drafts, plus Assistant input/action editors; offer explicit Resume/Discard with seven-day expiry and per-account/household isolation.
+- [x] Preserve interrupted create payload signatures and retry keys, require fresh API money previews, clear cancelled/completed drafts and handle corrupt/blocked storage and competing tabs without automatic writes.
+- [ ] Deploy this draft-recovery release and verify refresh/full restart, reconnection, interrupted confirmation and app-update behavior on Android Chrome and iPhone Safari. Existing-record edits, purchases, transfers/removals, settings and votes remain outside this recovery slice.
+
 ## Completion rule for every item
 
 Use the relevant API contract, show loading/empty/error/success states, respect household and role boundaries, and test the user flow. For financial actions, verify the exact API result and retry behavior. Run the web app's lint, typecheck, tests, and build for each completed slice.
