@@ -6,6 +6,12 @@ HouseMate coordinates shared household money and daily work. The first release u
 
 The configured Supabase project is `avbroprkgyrkophcxvtm` (`https://avbroprkgyrkophcxvtm.supabase.co`). Local API and web environment files exist. Database migrations 001–016 and the additive action-create retry migration were applied to that project; the latter was verified on 2026-10-02. Local services were last verified on 2026-09-30 at `http://localhost:3001` (API, restarted with notification routes/worker, PID 38684) and `http://localhost:3000` (web, PID 9140); running processes are transient, so check them again.
 
+## Remove earlier tools from web search — 2026-10-05
+
+At the user's request, web commit `f70dfb00eb758c9a7becec17301d5bb28a993aba` removes Meals, Chores, Shopping and Polls from the record-type selector and All records results, including subsequent API pages. Expenses, Bills, Transfers, Events and Announcements remain. Earlier-only pages retain Load more when an API cursor exists. Existing records and direct links remain available; the API contract is unchanged.
+
+The user explicitly authorized merging and deploying this update. Web PR #2 merged into main as `dbbad24d1fd0b072fd0332c2107a1e8361b6893d`. All 10 focused search tests, local lint/typecheck/build, feature CI `37321611565` and main CI `37322506079` passed. Vercel production `dpl_D4gJudPyCjyVpJBUBBG8geZcaHPr` reached READY for the exact merge commit at `housemate-9yf1d665g-dreamy-day.vercel.app`, with https://housemate-app-xi.vercel.app assigned. In the live signed-in workspace, the search selector contains exactly All records, Expenses, Bills, Transfers, Events and Announcements; Earlier household tools and its four options are absent. Browser error logs were empty. The parent pins the deployed merge commit and SPEC describes the released behavior.
+
 ## Mascot refresh and installed phone search — 2026-10-05
 
 The user authorized deploying both web features. Web PR #1 merged as `6ee2603dd56d4a0fb76f96afcc015c2830065aa5`, preserving commits `3bae7e7` (mascot refresh) and `f19287b` (installed phone search). Workspace mascots reload the current URL and are disabled while pending work is open. Only installed standalone phone views up to 650px use a plain Search icon; browsers retain the circular background and all views retain the 44px target.
