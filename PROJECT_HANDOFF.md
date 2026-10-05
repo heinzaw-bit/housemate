@@ -6,6 +6,12 @@ HouseMate coordinates shared household money and daily work. The first release u
 
 The configured Supabase project is `avbroprkgyrkophcxvtm` (`https://avbroprkgyrkophcxvtm.supabase.co`). Local API and web environment files exist. Database migrations 001–016 and the additive action-create retry migration were applied to that project; the latter was verified on 2026-10-02. Local services were last verified on 2026-09-30 at `http://localhost:3001` (API, restarted with notification routes/worker, PID 38684) and `http://localhost:3000` (web, PID 9140); running processes are transient, so check them again.
 
+## Mascot refresh and installed phone search — 2026-10-05
+
+The user authorized deploying both web features. Web PR #1 merged as `6ee2603dd56d4a0fb76f96afcc015c2830065aa5`, preserving commits `3bae7e7` (mascot refresh) and `f19287b` (installed phone search). Workspace mascots reload the current URL and are disabled while pending work is open. Only installed standalone phone views up to 650px use a plain Search icon; browsers retain the circular background and all views retain the 44px target.
+
+GitHub CI run `37294306692` passed clean installation, lint, typecheck, tests and production build. Production deployment `housemate-i8kqtq5wv-dreamy-day.vercel.app` reported success for the exact merge commit. At the canonical https://housemate-app-xi.vercel.app site, the signed-in workspace rendered the refresh button, clicking it reloaded the same URL and retained the selected household, and a 390px browser viewport retained the circular Search background and 44px target. Browser error logs were empty. Real installed-phone appearance remains a device acceptance check. SPEC and the app README describe both features; the app submodule pins the deployed revision.
+
 ## GitHub repositories — 2026-09-30
 
 The user created three private repositories and authorized pushing them to **heinzaw-bit**. GitHub CLI's authenticated login was verified as heinzaw-bit. The actual umbrella name is **housemate**, not the earlier proposed house_mate. Remotes are `https://github.com/heinzaw-bit/housemate.git`, `https://github.com/heinzaw-bit/housemate-api.git`, and `https://github.com/heinzaw-bit/housemate-app.git`. API and app have independent commits on main and are registered as submodules with main as their tracking branch. Root Git history is preserved. Each child has engineering instructions and a README linking the shared product documents; neither needs a sibling to build.
