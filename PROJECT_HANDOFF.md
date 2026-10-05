@@ -145,6 +145,15 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Navigation and interaction release — production 2026-10-06
+
+The user authorized merging this branch into main and deploying. Feature app commit **4669fdd** was merged with current origin/main as **b5d6255cc2c6c45fc0f075d61a8b7340f15dc7c8** and pushed to heinzaw-bit/housemate-app main. Newer mobile icon/search-icon and removal-of-earlier-search-tools commits are preserved. The whole-project feature branch was also merged into current root main; its app submodule pins b5d6255 and API remains unchanged at **51b716d**. Earlier local/publication-status notes below are superseded by this entry.
+
+DreamyDay production deployment **dpl_AzwhqPXh4VpFBqK9VYj9KBi5wNfU** (housemate-htabvptjt-dreamy-day.vercel.app) is READY for that exact merge SHA; its aliases include **https://housemate-app-xi.vercel.app**. The Vercel MCP context returned no teams; the existing Vercel CLI login was verified as heinzaw-bit and used to inspect the Git-triggered release. No project/environment/provider setting was changed.
+
+Merged main passed web lint, TypeScript and production build, plus **227 tests across 36 files** including the newer brand/search regressions. Staged credential checks passed. Live checks returned 200 for Home, sign-in, Assistant, Board, Money, Profile, Notifications, runtime health, manifest and worker; the root serves its session-check entry, manifest remains standalone, and the deployed worker matches source. GitHub CI **37358026286** passed on this exact merge; sanitized web error/5xx production log checks each returned zero entries. Real signed-in phone motion/performance checks remain pending in app/QUALITY_CHECKS.md. Keep the user's pre-existing next-env.d.ts development route references and untracked marketing files; they are excluded from publication.
+
+
 ### Interaction animations — local 2026-10-06
 
 The user requested all seven recommended animation improvements. They are implemented locally on **codex/smoother-tab-navigation** in root/app, with the earlier persistent-shell/recent-read work and Home Refresh removal preserved. No commit/push/merge/deployment was requested; main/production and API remain unchanged.
