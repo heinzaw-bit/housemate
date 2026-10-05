@@ -6,6 +6,12 @@ HouseMate coordinates shared household money and daily work. The first release u
 
 The configured Supabase project is `avbroprkgyrkophcxvtm` (`https://avbroprkgyrkophcxvtm.supabase.co`). Local API and web environment files exist. Database migrations 001–016 and the additive action-create retry migration were applied to that project; the latter was verified on 2026-10-02. Local services were last verified on 2026-09-30 at `http://localhost:3001` (API, restarted with notification routes/worker, PID 38684) and `http://localhost:3000` (web, PID 9140); running processes are transient, so check them again.
 
+## Remove earlier tools from web search — 2026-10-05
+
+At the user's request, web commit `f70dfb00eb758c9a7becec17301d5bb28a993aba` removes Meals, Chores, Shopping and Polls from the record-type selector and All records results, including subsequent API pages. Expenses, Bills, Transfers, Events and Announcements remain. Earlier-only pages retain Load more when an API cursor exists. Existing records and direct links remain available; the API contract is unchanged.
+
+Web PR #2 is ready for production. All 10 focused search tests, local lint/typecheck/build and full GitHub CI run `37321611565` passed. The branch preview deployed successfully. Automatic approval review rejected the production merge because this new change requires explicit user deployment authorization. It is not yet merged or deployed to production; this parent branch pins the reviewed feature commit and SPEC describes the intended change. After authorization, merge the web PR, verify production and update this release record before merging the parent PR.
+
 ## Mascot refresh and installed phone search — 2026-10-05
 
 The user authorized deploying both web features. Web PR #1 merged as `6ee2603dd56d4a0fb76f96afcc015c2830065aa5`, preserving commits `3bae7e7` (mascot refresh) and `f19287b` (installed phone search). Workspace mascots reload the current URL and are disabled while pending work is open. Only installed standalone phone views up to 650px use a plain Search icon; browsers retain the circular background and all views retain the 44px target.
