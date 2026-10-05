@@ -145,6 +145,35 @@ All API/web lint, typecheck, tests, and builds passed after the events slice on 
 
 ## START HERE
 
+### Interaction animations — local 2026-10-06
+
+The user requested all seven recommended animation improvements. They are implemented locally on **codex/smoother-tab-navigation** in root/app, with the earlier persistent-shell/recent-read work and Home Refresh removal preserved. No commit/push/merge/deployment was requested; main/production and API remain unchanged.
+
+Main tab content fades inside the retained shell. Shared buttons/header controls give brief press feedback; transition properties are narrowed. Search and household dialogs use Base UI starting/ending presence transitions, with phone sheet slides and desktop fades; existing focus/safe-area behavior remains. Home activity, money sources/suggestions/transfers/expense and bill histories, and Assistant record previews fade when expanded/condensed without height tweens or animated money counters. Assistant retains its existing in-box thinking dots/animation, adds a single mascot greeting per visit and fades newly mounted answers. A shared SuccessNotice adds a decorative animated check to verified success messages in household/financial/notification flows; Profile/settings errors retain their plain message while only their known confirmed success messages use checks. Pending and uncertain confirmation flows are untouched.
+
+Notification popup entry uses slide/fade. Dismissed popups become inert and aria-hidden immediately, then finish a 160-ms visual exit; Reduce motion bypasses the delay. Exit callbacks are cancelled on unmount/scope replacement. Existing eight-second hover/focus/hidden pause behavior, unread state and quiet first load remain. Motion is implemented with lightweight CSS and no new dependency; new effects opt into prefers-reduced-motion: no-preference. Existing Assistant loading motion and global reduced-motion handling are retained. React review checked scoped keys, stable callback/timer cleanup, semantic status messages and decorative SVG wrapper animation.
+
+Verification: web lint, TypeScript (standalone and production build), **223 tests across 35 files**, and production build passed. Four new regressions cover inert/accessible dismissal, exact single delayed removal, immediate reduced-motion dismissal, scope/unmount cancellation and decorative success status. Full existing money/Assistant/communications/draft tests passed. SPEC, web README and QUALITY_CHECKS document behavior and actual-device acceptance. Real Android/iPhone visual smoothness and performance have not been measured. The user's pre-existing next-env.d.ts dev-route references were restored after build; retain root untracked marketing files.
+
+
+### Home Refresh control removed — local 2026-10-06
+
+On codex/smoother-tab-navigation, the user requested removing the outlined Refresh control pictured on Home. HomeDashboard now shows only its checked/update status; existing automatic return/reconnection/polling refresh is retained. Removed the manual retry state and changed failure guidance to explain automatic refresh. Other tabs are unaffected. SPEC and web README updated. Component lint and web TypeScript passed. No commit/push/deployment requested.
+
+
+### Smoother tab navigation — local branch 2026-10-06
+
+The user approved the performance recommendation on a new branch. Root and app are on **codex/smoother-tab-navigation**, created from production main (app **833f07d**, project **43bbe0d**); API remains untouched on main **51b716d**. Changes are local/uncommitted: no push, merge or deployment was requested for this feature. Preserve the pre-existing app next-env.d.ts dev-route references and root untracked marketing image/output.
+
+The shared root AppShell/HomeEntry retains AccountView and Workspace across Home, Money, Board, Assistant, Profile and Notifications, avoiding repeated account reads and shell replacement on same-household tab navigation, including the first transition from a plain Home URL. useSearchParams synchronizes household/invitation and Board record/filter links while the shell stays mounted; foreign household URLs never fall back to another household's UI. Existing signed-out landing, standalone/session restoration, account replacement, draft/confirmation guards, old tool deep links and API ownership are retained.
+
+Successful authorized dashboard, balance, member and first-page expense/bill/settlement/announcement/event GETs seed a browser-memory-only snapshot store (60-second eligibility, 64-entry bound, session/household/path keys). Home/Money/Board use a recent snapshot on remount while always requesting fresh API data. Last-checked/updating status and failed-refresh warnings identify retained views; access failures clear their displayed records. Writes, auth/session changes, household changes and access rejection invalidate snapshots. Generation keys prevent in-flight reads started before invalidation being shared with new reads or repopulating snapshots. Financial previews/confirmations, details, later pages, search and Assistant responses do not use snapshots. No private response is stored in persistent browser or service-worker storage, and no write is queued/replayed.
+
+WorkspaceLoading now supplies accessible static skeleton shapes for Home, Money, Assistant, Profile and record sections; uncached dashboard/money/Board reads use placeholders. Existing lazy workspace loading/paging remains. SPEC, app README and QUALITY_CHECKS describe the changes and actual-phone acceptance steps. React review checked lazy loading, scoped state, effect dependencies/request races, parallel reads, status semantics and skeleton accessibility.
+
+Verification of the final source: web lint, TypeScript (standalone and production build), **219 tests across 34 files**, and Next production build passed. New tests verify shell node retention and no repeated account reads on tab switches, foreign household routing, session/household cache isolation, expiry/size bounds, fresh GETs, preview-vs-write invalidation, denied reads, late-response invalidation and event snapshot refresh/failure/access removal. Actual Android/iPhone rendering and before/after navigation latency have not been measured; follow app/QUALITY_CHECKS.md before claiming phone speed improvements. Review/test this branch next; main and production stay at the prior release until explicitly published.
+
+
 ### Mobile UI refinements — production 2026-10-04
 
 The user requested deployment. Web main **833f07d1e8da4ff09e7cc89e280e51c5bde20034** is committed and pushed to heinzaw-bit/housemate-app. It includes the local fixes below: matching 44px mobile header mascot, a single scrolling Board filter row, removal of View balance/Calculate a split answer-footer actions, active-tab + New beside the Board title, in-form cancellation/focus, and Refresh beside list update status. No API, migration or environment change was required. API remains **51b716dd82b2aca8811cc78b0f2bc5c4463ea231**.

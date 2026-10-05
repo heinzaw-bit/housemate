@@ -57,10 +57,12 @@ This document describes intended features and user-visible behavior. It can chan
 
 ### Home dashboard
 
+- Home has no manual Refresh button. Keep the checked/update status and automatic API refresh on return, reconnection and the existing visible-tab polling interval; refresh failures explain automatic recovery.
+
 - Home puts up to three earliest Unpaid bills first in Bills to watch. Bills remain ordered by due date; overdue means before today in the household timezone and due soon means today through seven days ahead, inclusive. Home no longer promotes chores, meals or shopping.
 - Follow with two compact summaries: the signed-in member's confirmed net balance and the household's total Unpaid bills. Amounts use the household currency; voided bills are excluded. Include all pending bills in totals even when only three are previewed. Unpaid bills affect balances only when marked Paid.
 - Show the three most recent financial events initially, with an option to expand to the ten returned by the API. Recent activity includes creation, edits, voids, provider-status changes, and reported manual transfers, newest first. Each entry opens the specific expense, bill, or transfer; record history shows prior values. Home has no quick-action button group; creation actions are available in their Money and House sections.
-- Show loading, genuine empty results, errors with retry, and a last-updated time. Refresh on return to Home, window focus, reconnection, and roughly every minute while visible. Keep the last successful snapshot during temporary errors, visibly marked as possibly out of date; discard it on an access failure or household change.
+- Show loading, genuine empty results, errors with automatic-refresh guidance, and a last-updated time. Refresh on return to Home, window focus, reconnection, and roughly every minute while visible. Keep the last successful snapshot during temporary errors, visibly marked as possibly out of date; discard it on an access failure or household change.
 - Events and announcements are not part of the Home summary. Do not invent counts or sample records as live data.
 
 ### Money, bills, and settlements
@@ -141,7 +143,20 @@ Account changes replace household UI state and request the new account's authori
 data. One browser has one active session shared across tabs; switching does not
 merge users, memberships or financial records.
 
+### Interaction motion
+
+- Use brief content fades for main tab changes while shared navigation stays mounted. Buttons give subtle press feedback; transitions never delay routing or confirmation controls.
+- Keep Assistant thinking dots inside the question box, add one short mascot greeting per Assistant visit, and fade in new answers. General/household answer content and money amounts remain unchanged.
+- Search and household menus fade on desktop; phone search/household sheets slide up briefly, retaining focus trapping, keyboard and safe-area behavior. View all/Show less previews use a short content fade in place; avoid animating container heights or counting through money values.
+- Show an animated decorative check only alongside verified successful saves, acknowledgements, attendance and confirmed record actions. Pending, uncertain and failed confirmations keep their existing state and cannot trigger success feedback.
+- New notification popups slide/fade in. Dismissal makes a popup inert and unavailable to accessibility APIs immediately, then removes its visual exit after 160 ms. Reduced motion removes it immediately. Existing pause-on-hover/focus/hidden behavior, unread state and scope cleanup remain.
+- Honor the OS Reduce motion preference. New transitions use lightweight CSS, opacity and transforms with mostly 150–200 ms durations, no animation library, no background network work and no delayed writes.
+
 ### First-release web quality
+
+- Keep the authenticated app shell mounted across Home, Money, Board, Assistant, Profile and Notifications navigation. Retain the loaded account view and shared header/navigation controls within the current account and household; synchronize household selectors and exact record links with route changes.
+- On returning to Home, Money or Board, show an available authorized read snapshot from this browser tab for up to 60 seconds while requesting fresh API data. Snapshots live only in bounded browser memory (64 responses), keyed by session and household; they are not persistent storage or an offline data source. Show a last-checked/updating status and an outdated warning after refresh failures. Clear retained data on access rejection and invalidate snapshots after household writes, account/session changes and household changes. Responses started before invalidation cannot repopulate snapshots.
+- Snapshot reuse covers dashboard, balances, members and first-page expense/bill/settlement/announcement/event reads only. Details, later pages, search, Assistant responses and financial previews/confirmations always use fresh API requests. Keep explicit confirmation and existing draft guards. Show accessible section-shaped loading placeholders when no recent snapshot exists; actual phone performance must be measured separately.
 
 - Prioritize Android Chrome and iPhone Safari. Offer installation help on sign-in and Profile, an explicit browser install action when available, home-screen icons, and safe-area spacing. Installation and notification permission are separate choices.
 - Cache only a public offline navigation screen. Never cache private household/API responses in the service worker or queue household writes. Existing displayed data may be stale offline; show a connection notice. Reconnection refreshes reads on return and never resubmits a financial action automatically.
