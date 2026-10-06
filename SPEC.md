@@ -264,3 +264,11 @@ bytes require separate backup before file uploads can be considered covered.
 
 - Which chores and bills need recurrence after the first one-off release, and at what schedule and cutoff rules?
 - When should native mobile push and optional email, SMS, or LINE delivery be added beyond the implemented web inbox and push controls?
+
+### Timely notification delivery — 2026-10-06
+
+- Successful household record writes request an immediate queue pass after the response using Vercel waitUntil. Previews, rejected writes, read markers and device tests do not wake it. Overlapping saves request one bounded follow-up; the minute scheduler remains durable recovery and reminder generation. Phone-delivery timing is not guaranteed.
+- The worker leases four jobs at a time and drains up to 200 within a 20-second budget, reserving ten seconds for provider timeout. Existing source/membership, opt-in, quiet hours, queue keys, retries and invalid-device checks remain. High urgency is limited to urgent updates or reminders expiring within 30 minutes. TTL remains capped by notification expiry and one hour; urgency does not bypass quiet hours/Focus.
+- Push first displays the fixed privacy-preserving native notification, then invalidates clients without private content. Bell/inbox fetch fresh authorized data, with a 15-second visible/online fallback. Tap links and draft/update guards remain.
+- Settings offers an explicit Test notification for this device. The API requires active membership/ownership and reserves a persistent one-minute cooldown before sending. The explicit test bypasses categories/quiet hours, uses fixed test text and a 60-second TTL, and is never automatically retried. Provider acceptance is distinct from phone receipt.
+- Additive migration 017 adds queue/attempt and test timestamps to existing private RLS tables. Private aggregate health reports due-age, failures, acceptance count and creation/queue-to-acceptance seconds. Due-age excludes quiet/retry deferrals; latency includes intentional delays and older queue times begin at migration. Scheduled runs return 503 for due age >=3 minutes, recent terminal failures or three transient failure attempts, using existing scheduler failure/recovery emails and sanitized Sentry grouping. Read-only health cannot invoke the worker. Locked-phone timing remains manual acceptance.
