@@ -131,10 +131,13 @@ This document describes intended features and user-visible behavior. It can chan
 Signed-out visitors at the root see a public landing page with shared-money,
 daily-coordination and household-updates features, setup steps, an interactive
 product tour, FAQ and a factual privacy overview. Product illustrations use
-explicitly labelled fictional records. Get started/Sign in open `/sign-in`;
+explicitly labelled fictional records. Set up a household and Sign in open
+`/sign-in`. Invitees use their housemate’s invitation link. After an explicit
+sign-out, the sign-in page confirms the session ended and offers the available
+sign-in methods and guidance for creating or joining a household.
 the root waits for session restoration and browser launch detection with the mascot and “Opening HouseMate…” before selecting a screen. Restored members continue directly to their dashboard, without a landing-page flash. Signed-out Home Screen launches on Android Chrome and iPhone Safari open sign-in instead of marketing. Invite/household deep links and
 authentication callbacks bypass marketing and preserve the normal access flow.
-Landing content supports light/dark mode, keyboard controls and phone layouts.
+The landing and sign-in pages use the shared theme, keyboard controls and phone layouts.
 The public page is divided into Overview, Features, How it works, Tour, Privacy
 and FAQ along the natural vertical scroll. Fade each upcoming section in as it
 enters view, then keep it visible. Header anchors jump directly to sections;
