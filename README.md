@@ -84,3 +84,11 @@ recovery steps. Offsite backup storage and unattended scheduling need configurat
 - [Project boundaries](AGENTS.md): durable engineering and security rules for work across all three projects.
 - [API contract](api/openapi.yaml): implemented HTTP endpoints and schemas.
 - The other root Markdown files are supporting product and domain references. Some describe an earlier web-only architecture; follow the current SPEC and project boundaries when they differ.
+
+## Copyright and reuse
+
+All rights in original HouseMate material are reserved by the respective
+copyright holders. Reuse, modification, and redistribution require permission
+from the relevant copyright holder, subject to applicable law and GitHub's
+terms. Third-party code, fonts, and other materials are governed by their own
+licenses and attribution notices.
